@@ -2,11 +2,13 @@
 
 import { NgModule } from '@angular/core';
 import { NavComponent } from './nav.component';
+import { SearchComponent } from '../search/search.component';
 
 @NgModule({
   imports: [],
   declarations: [
-    NavComponent
+    NavComponent,
+    SearchComponent
   ],
   exports: [
     NavComponent

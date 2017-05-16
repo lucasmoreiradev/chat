@@ -1,0 +1,66 @@
+$primary-color: #373F51;
+$secondary-color: #A9BCD0;
+$tertiary-color: #58A4B0; 
+$support-color: #F1FAEE;
+$accent-color: #BC2C1A;
+$warn-color: orange; 
+$sucess-color: green;
+
+html {
+  max-width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: $tertiary-color;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 700;
+  font-height: 1.25;
+  outline: none;
+}
+
+h1 {
+  font-size: 4.5vw;
+}
+
+h2 {
+  font-size: 4.1vw;
+}
+
+h3 {
+  font-size: 3.5vw;
+}
+
+h4 {
+  font-size: 3vw;
+}
+
+h5 {
+  font-size: 2.5vw;
+}
+
+h6 { 
+  font-size: 2vw;
+}
+
+input, textarea {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  background: $tertiary-color;
+  &::placeholder {
+    color: $support-color;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    text-align: center;
+  }
+}
+
+@import 'components/nav';
