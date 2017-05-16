@@ -1,7 +1,7 @@
 {
   "name": "ngx-webpack-boilerplate",
   "version": "0.0.1",
-  "description": "A simple way to setup ngX Enrivonment with Webpack",
+  "description": "Realtime chat",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fauker/ngx-webpack-boilerplate.git"
+    "url": "git+https://github.com/fauker/chat.git"
   },
   "keywords": [
     "ngx",
@@ -19,9 +19,9 @@
   "author": "Lucas Moreira",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fauker/ngx-webpack-boilerplate/issues"
+    "url": "https://github.com/fauker/chat/issues"
   },
-  "homepage": "https://github.com/fauker/ngx-webpack-boilerplate#readme",
+  "homepage": "https://github.com/fauker/chat#readme",
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
