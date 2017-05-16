@@ -1,17 +1,17 @@
-# ngX Webpack Boilerplate
+# Chat  
 
-It's very easy, just follow the steps below:
 
-`install node v7`
+- `install node v7`
 
-`clone this project`
+- `clone this project`
 
-`npm i -g yarn`
+- `npm i -g yarn`
 
-`yarn install`
+- `yarn install`
 
-`npm start`
+- `npm start`
 
-`localhost:9000` 
+- `localhost:9000` 
 
-:boom:
+Enjoy it!
+
