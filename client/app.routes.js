@@ -9,11 +9,13 @@ import { ProfilePage } from './pages/profile/profile.page';
 export const routes = [
   {
     path: '',
-    component: DashboardPage
-  },
-  {
-    path: 'profile',
-    component: ProfilePage
+    component: DashboardPage,
+    children: [
+      {
+        path: 'profile',
+        component: ProfilePage
+      }
+    ]
   }
 ];
 
