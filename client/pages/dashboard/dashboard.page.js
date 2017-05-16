@@ -7,6 +7,10 @@ import { NavComponent } from '../../components/common/nav.component';
 @Component({
   template: `
     <navigation></navigation>
+    <div class="container">
+      <friends></friends>
+      <router-outlet class="child-views"></router-outlet>
+    </div>
   `
 })
 

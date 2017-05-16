@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { DashboardPage } from './dashboard.page';
 import { NavModule } from '../../components/common/nav.module';
+import { SharedModule } from '../../components/common/shared.module';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
   imports: [
-    NavModule
+    SharedModule,
+    NavModule,
+    ProfileModule
   ],
   declarations: [
     DashboardPage

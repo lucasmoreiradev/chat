@@ -1,7 +1,7 @@
 $primary-color: #373F51;
-$secondary-color: #A9BCD0;
-$tertiary-color: #58A4B0; 
-$support-color: #F1FAEE;
+$secondary-color: #4b5262;
+$tertiary-color: #ebebed; 
+$support-color: #C0C0C0; 
 $accent-color: #BC2C1A;
 $warn-color: orange; 
 $sucess-color: green;
@@ -20,6 +20,7 @@ body {
   background: $tertiary-color;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   letter-spacing: 1px;
+  z-index: 1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -56,6 +57,7 @@ h6 {
 input, textarea {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   background: $tertiary-color;
+  font-size: 16px;
   &::placeholder {
     color: $support-color;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -64,3 +66,5 @@ input, textarea {
 }
 
 @import 'components/nav';
+@import 'components/friends';
+@import 'components/dash';

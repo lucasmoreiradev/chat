@@ -14,7 +14,9 @@ import { SearchComponent } from '../search/search.component'
         <search></search>
       </div>
       <div class="controls">
-        <a class="perfil">Perfil</a>
+        <a routerLink="profile" class="perfil">
+          Perfil
+        </a>
         <a class="logout">Logout</a>
       </div>
     </nav>

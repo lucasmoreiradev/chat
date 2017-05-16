@@ -1,0 +1,13 @@
+friends {
+  height: 100%;
+  background-color: $secondary-color;
+  z-index: 100;
+  .friends-container {
+    width: 27vw;
+    height: 100%;
+  }
+  span {
+    color: $support-color;
+    font-size: 11px;
+  }
+}

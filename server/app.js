@@ -11,11 +11,10 @@ const bodyParser = require('body-parser')
 
 // App modules
 const app = express()
-const router = express.Router()
+const router = require('./router')
 
 // Absolute paths
 const publicPath = path.join(__dirname, '../public/')
-const pathToBundle = path.join(publicPath, 'index.html')
 
 // Middlewares
 if (process.env.NODE_ENV != 'production') {
@@ -25,14 +24,6 @@ if (process.env.NODE_ENV != 'production') {
 app.use(helmet())
 app.use(bodyParser.json())
 //app.use(favicon(path.join(publicPath, '/favicon.ico')))
-
-// App routes
-router.get('/', (req, res) => {
-  res.sendFile(pathToBundle)
-})
-
-// Api endpoints
-// require('./endpoints')(router)
 
 // Catch all undefined routes
 router.get('*', (req, res, next) => {
