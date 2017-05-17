@@ -1,7 +1,8 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { SearchComponent } from '../search/search.component'
+import { SearchComponent } from '../search/search.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'navigation',
@@ -14,7 +15,7 @@ import { SearchComponent } from '../search/search.component'
         <search></search>
       </div>
       <div class="controls">
-        <a routerLink="profile" class="perfil">
+        <a routerLink="/profile" class="perfil">
           Perfil
         </a>
         <a class="logout">Logout</a>
