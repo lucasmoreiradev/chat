@@ -65,6 +65,15 @@ input, textarea {
   }
 }
 
+a {
+  color: $accent-color;
+  text-decoration: none;
+  font-weight: 400;
+  word-break: break-word;
+}
+
 @import 'components/nav';
 @import 'components/friends';
 @import 'components/dash';
+@import 'views/profile';
+@import 'components/profileDetails';

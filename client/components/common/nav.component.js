@@ -7,7 +7,7 @@ import { SearchComponent } from '../search/search.component'
   selector: 'navigation',
   template: `
     <nav>
-      <a>
+      <a routerLink="/">
         <h3>Chat</h3>
       </a>
       <div class="search-bar">
