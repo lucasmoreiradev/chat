@@ -2,7 +2,7 @@ $primary-color: #373F51;
 $secondary-color: #4b5262;
 $tertiary-color: #ebebed; 
 $support-color: #C0C0C0; 
-$accent-color: #BC2C1A;
+$accent-color: #B452FF;
 $warn-color: orange; 
 $sucess-color: green;
 
@@ -72,8 +72,24 @@ a {
   word-break: break-word;
 }
 
+button {
+  margin: 8px 0;
+  padding: 24px 64px;
+  border-radius: 3px;
+  color: white;
+  border: none;
+  outline: none;
+  font-weight: 200;
+  cursor: pointer;
+  &[disabled] {
+    background: $support-color;
+  }
+}
+
 @import 'components/nav';
 @import 'components/friends';
 @import 'components/dash';
 @import 'views/profile';
 @import 'components/profileDetails';
+@import 'components/login';
+@import 'views/landing';
