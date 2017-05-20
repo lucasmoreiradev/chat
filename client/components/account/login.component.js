@@ -12,6 +12,7 @@ import { Component } from '@angular/core'
       <label>Senha</label>
       <input type="password">
       <button type="submit">Entrar</button>
+      <a routerLink="/signup">Cadastre-se</a>
     </form>
   `
 })
