@@ -1,0 +1,48 @@
+login, signup {
+  align-self: center;
+  form {
+    width: 35vw;
+    padding: 16px;
+    background: rgba($primary-color, .9);
+    h1 {
+      color: white;
+      text-align: center;
+    }
+    label {
+      color: white;
+    }
+    input, label {
+      display: block;
+      width: 95%;
+      margin: 8px auto 16px;
+    }
+    input {
+      padding: 8px;
+      background: white;
+      color: $primary-color;
+      border-radius: 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+    a {
+      margin-left: 10px;
+      color: white;
+    }
+    button {
+      display: block;
+      margin: 8px auto 0;
+      background: $accent-color;
+    }
+  }
+  .name-email {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    .username, .email {
+      width: 50%;
+      input {
+        width: 90%;
+      }
+    }
+  } 
+}
