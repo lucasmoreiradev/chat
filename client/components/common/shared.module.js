@@ -3,6 +3,7 @@
 import { NgModule } from '@angular/core';
 import { FriendsComponent } from './friends.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     FriendsComponent,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 export class SharedModule {}
