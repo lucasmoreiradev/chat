@@ -2,6 +2,8 @@
 
 import { Component, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -27,11 +29,23 @@ import { FormsModule } from '@angular/forms';
   `
 })
 export class SignupComponent {
+  constructor (auth: AuthService, router: Router) {
+    this.router = router
+    this.auth = auth
+  }
   ngOnInit () {
     this.model = {}
     this.erros = {}
   }
   onSubmit () {
     console.log(this.model)
+    this.auth.signup(this.model)
+      .then(user => {
+        console.log(user) 
+        this.router.navigate([''])
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app.routes'
+import { AuthService } from './services/auth.service'
 
 @NgModule({
   imports: [
@@ -11,6 +12,9 @@ import { AppRoutingModule } from './app.routes'
     FormsModule,
     HttpModule,
     AppRoutingModule
+  ],
+  providers: [
+    AuthService
   ],
   declarations: [
     AppComponent

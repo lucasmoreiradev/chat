@@ -9,6 +9,9 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const passport = require('passport')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 
 // App modules
 const app = express()
@@ -26,7 +29,17 @@ if (process.env.NODE_ENV != 'production') {
   app.use(morgan('dev'))
 }
 app.use(helmet())
+app.use(session({
+  key: 'express.sid',
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore( {mongooseConnection: mongoose.connection} ),
+  cookie: { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }
+}))
 app.use(bodyParser.json())
+app.use(passport.initialize())
+app.use(passport.session())
 //app.use(favicon(path.join(publicPath, '/favicon.ico')))
 
 // Catch all undefined routes
@@ -42,6 +55,8 @@ app.use('/js', express.static(path.join(publicPath, '/js')))
 
 // Use the router
 app.use('/', router)
+
+require('./auth/auth')(app)
 
 // Handle unmatched routes
 const handle404 = (err, req, res, next) => {
