@@ -38,10 +38,8 @@ export class SignupComponent {
     this.erros = {}
   }
   onSubmit () {
-    console.log(this.model)
     this.auth.signup(this.model)
       .then(user => {
-        console.log(user) 
         this.router.navigate([''])
       })
       .catch(err => {

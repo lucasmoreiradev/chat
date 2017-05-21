@@ -35,7 +35,7 @@ module.exports = (passport) => {
       email: email
     }, (err, user) => {
       if (err) return done(err, null)
-      if (!user) return done(null, false);
+      if (!user) return done(null, false)
 
       if (!user.validPassword(attempt, user.password)) {
         return done(null, false)

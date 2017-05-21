@@ -34,7 +34,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: false,
-  store: new MongoStore( {mongooseConnection: mongoose.connection} ),
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }
 }))
 app.use(bodyParser.json())
