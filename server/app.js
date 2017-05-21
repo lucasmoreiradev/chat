@@ -8,6 +8,7 @@ const morgan = require('morgan')
 const express = require('express')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 // App modules
 const app = express()
@@ -15,6 +16,9 @@ const router = require('./router')
 
 // Absolute paths
 const publicPath = path.join(__dirname, '../public/')
+
+// Mongoose connection
+mongoose.connect('mongodb://localhost/chat-dev')
 
 // Middlewares
 if (process.env.NODE_ENV != 'production') {
