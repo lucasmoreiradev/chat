@@ -1,6 +1,8 @@
 'use strict'
 
 import { Component } from '@angular/core'
+import { AuthService } from '../../services/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'login',
@@ -8,12 +10,31 @@ import { Component } from '@angular/core'
     <form name="login">
       <h1>Chat Project</h1>
       <label>Email</label>
-      <input type="email">
+      <input type="email" [(ngModel)]="model.email" name="email">
       <label>Senha</label>
-      <input type="password">
-      <button type="submit">Entrar</button>
+      <input type="password" [(ngModel)]="model.password" name="password">
+      <button type="submit" (click)="onSubmit()">Entrar</button>
       <a routerLink="/signup">Cadastre-se</a>
     </form>
   `
 })
-export class LoginComponent {}
+export class LoginComponent {
+  constructor (auth: AuthService, router: Router) {
+    this.router = router
+    this.auth = auth
+  }
+  ngOnInit () {
+    this.model = {}
+    this.errors = {}
+  }
+  onSubmit () {
+    this.auth.login(this.model)
+      .then(user => {
+        console.log(user)
+        this.router.navigate(['/dashboard']);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
