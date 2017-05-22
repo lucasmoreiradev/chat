@@ -12,7 +12,7 @@ import { SignupPage } from './pages/signup/signup.page';
 
 export const routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardPage,
     children: [
       {

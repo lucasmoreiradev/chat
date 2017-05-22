@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const timestemp = require('./plugins/timestemp')
 const bcrypt = require('bcryptjs')
 
-var schema = new Schema({
+const schema = new Schema({
   email: { type: String, lowercase: true },
   password: String,
   username: String,

@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   selector: 'navigation',
   template: `
     <nav>
-      <a routerLink="/">
+      <a routerLink="/dashboard">
         <h3>Chat</h3>
       </a>
       <div class="search-bar">
