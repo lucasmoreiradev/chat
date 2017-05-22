@@ -40,7 +40,7 @@ export class SignupComponent {
   onSubmit () {
     this.auth.signup(this.model)
       .then(user => {
-        this.router.navigate(['/dashboard'])
+        this.router.navigate([''])
       })
       .catch(err => {
         console.log(err)

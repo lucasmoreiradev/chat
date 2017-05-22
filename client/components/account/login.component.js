@@ -30,8 +30,7 @@ export class LoginComponent {
   onSubmit () {
     this.auth.login(this.model)
       .then(user => {
-        console.log(user)
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['']);
       })
       .catch(err => {
         console.log(err)
