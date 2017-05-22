@@ -1,6 +1,6 @@
 'use strict';
 
-function timestemp (schema, options) {
+const timestemp = (schema, options) => {
   schema.add({
     created_at: { type: Date, default: Date.now() }
   })
