@@ -4,6 +4,8 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { LoginModule } from './pages/login/login.module';
 import { SignupModule } from './pages/signup/signup.module';
 
+import { UserResolver } from './resolvers/user.resolver'
+
 // Main pages
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { ProfilePage } from './pages/profile/profile.page';
@@ -16,8 +18,11 @@ export const routes = [
     component: DashboardPage,
     children: [
       {
-        path: 'profile',
-        component: ProfilePage
+        path: 'profile/:username',
+        component: ProfilePage,
+        resolve: {
+          user: UserResolver
+        }
       }
     ]
   },
@@ -38,7 +43,9 @@ export const routes = [
     LoginModule,
     SignupModule
   ],
-  providers: [],
+  providers: [
+    UserResolver
+  ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

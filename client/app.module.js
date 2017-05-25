@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app.routes'
 import { AuthService } from './services/auth.service'
+import { ApiService } from './services/api.service'
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { AuthService } from './services/auth.service'
     AppRoutingModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    ApiService
   ],
   declarations: [
     AppComponent

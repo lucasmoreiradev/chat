@@ -1,6 +1,7 @@
 'use strict';
 
-import { Component } from '@angular/core';
+import { Component, ngOnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 import * as template from './profile.page.html';
 
 @Component({
@@ -9,4 +10,15 @@ import * as template from './profile.page.html';
     ${template}
   `
 })
-export class ProfilePage {}
+export class ProfilePage {
+  constructor (route: ActivatedRoute) {
+    console.log(route)
+    this.route = route
+  }
+  ngOnInit () {
+    this.route.data
+      .subscribe({ user }) => {
+        console.log(user)
+      }
+  }
+}
