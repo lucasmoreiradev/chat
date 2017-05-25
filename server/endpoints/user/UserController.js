@@ -25,9 +25,21 @@ class UserController {
       .catch(err => res.send(err))
   }
 
-  static update (req, res) {
+  static update(req, res) {
+    if (req.params.id != req.user._id) return res.sendStatus(401)
 
+    User.findById(req.user._id, (err, user) => {
+      if (err) return res.send(err)
+      if (!user) return res.sendStatus(404)
+
+      var updated = _.merge(user, req.body)
+      updated.save((err, user) => {
+        if (err) return res.send(err)
+        res.json(user)
+      })
+    })
   }
+
 }
 
 module.exports = UserController 

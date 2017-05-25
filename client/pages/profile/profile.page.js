@@ -16,6 +16,7 @@ export class ProfilePage {
   }
   ngOnInit () {
     this.sub = this.route.data.subscribe(({ user }) => {
+      console.log(user)
       this.user = user
     })
   }

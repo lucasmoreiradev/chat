@@ -1,16 +1,51 @@
 .details {
-  float: left;
-  width: 50%;
-  padding: 20px;
+  margin: 0 18px 0;
   p {
     color: $primary-color;
+  }
+  .detail {
+    margin: 2vw 0;
+    color: $primary-color;
+    font-weight: 700;
+    p:nth-child(2) {
+      margin-top: 1vw;
+      color: black;
+      font-weight: 400;
+    }
   }
 }
 
-.connections {
-  padding: 20px;
-  p {
+.editor {
+  width: 100%;
+  padding: 1vh 0;
+  label, p {
     color: $primary-color;
   }
+  p {
+    align-self: center;
+  }
+  input, label, textarea {
+    display: block;
+    margin: 1vw;
+  }
+  input, textarea {
+    box-sizing: border-box;
+    background: white;
+    color: $primary-color;
+    outline: none;
+  }
+  textarea {
+    border: none;
+  }
+}
+
+.editing {
+  background: $accent-color;
+  margin-left: 15px;
+}
+
+.saving {
+  background: $primary-color;
+  margin-left: 15px;
 }
 
