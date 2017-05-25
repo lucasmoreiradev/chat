@@ -17,7 +17,7 @@ class UserController {
   static show (req, res) {
     User.findOne({
       username: req.params.username 
-    })
+    }).select('-password')
       .then(user=> {
         if (!user) return res.sendStatus(404)
         return res.json(user)
