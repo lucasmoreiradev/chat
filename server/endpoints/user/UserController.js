@@ -10,10 +10,15 @@ class UserController {
   }
 
   static me (req, res) {
+    User.findById(req.user._id).select('-password')
+      .then((err, user) => {
+        if (err) return res.send(err)
+        if (!user) return res.sendStatus(404)
 
+        res.json(user);
+      })
   }
 
-  // Get a single team
   static show (req, res) {
     User.findOne({
       username: req.params.username 
@@ -25,7 +30,7 @@ class UserController {
       .catch(err => res.send(err))
   }
 
-  static update(req, res) {
+  static update (req, res) {
     if (req.params.id != req.user._id) return res.sendStatus(401)
 
     User.findById(req.user._id, (err, user) => {

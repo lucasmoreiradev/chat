@@ -15,9 +15,9 @@ export class ProfilePage {
     this.route = route
   }
   ngOnInit () {
-    this.sub = this.route.data.subscribe(({ user }) => {
-      console.log(user)
-      this.user = user
+    this.sub = this.route.data
+      .subscribe(({ user }) => {
+        this.user = user
     })
   }
   ngOnDestroy () {

@@ -5,6 +5,7 @@ import { LoginModule } from './pages/login/login.module';
 import { SignupModule } from './pages/signup/signup.module';
 
 import { UserResolver } from './resolvers/user.resolver'
+import { CurrentUserResolver } from './resolvers/currentuser.resolver'
 
 // Main pages
 import { DashboardPage } from './pages/dashboard/dashboard.page';
@@ -24,7 +25,10 @@ export const routes = [
           user: UserResolver
         }
       }
-    ]
+    ],
+    resolve: {
+      currentUser: CurrentUserResolver
+    }
   },
   {
     path: 'login',
@@ -44,7 +48,8 @@ export const routes = [
     SignupModule
   ],
   providers: [
-    UserResolver
+    UserResolver,
+    CurrentUserResolver
   ],
   exports: [ RouterModule ]
 })
