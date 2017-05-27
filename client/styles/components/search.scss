@@ -1,0 +1,46 @@
+.search-bar {
+  position: relative;
+  .elastic-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 90vh;
+    background: white;
+    overflow-y: scroll;
+    .fetching {
+      display: flex;
+      height: 6vh;
+      justify-content: center;
+      .loader {
+        background: $primary-color;
+      }
+      p {
+        color: $support-color;
+      }
+    }
+  }
+  .result {
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    flex-flow: row wrap;
+    overflow: hidden;
+    .name {
+      p {
+        color: $accent-color;
+      }
+    }
+    a {
+      display: flex;
+      padding: 0 24px;
+      cursor: pointer;
+      align-self: center;
+    }
+    img {
+      width: 32px;
+      height: 32px;
+      margin: 0 16px 0 0;
+    }
+  }
+}

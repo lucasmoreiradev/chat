@@ -19,11 +19,22 @@ class UserController {
       })
   }
 
+  static showByUsernameLike (req, res) {
+    User.find({
+      username: new RegExp(req.query.term, 'i')
+    }).select('-password')
+      .then(user => {
+        if (!user) return res.sendStatus(404) 
+        return res.json(user)
+      })
+      .catch(err => res.send(err))
+  }
+
   static show (req, res) {
     User.findOne({
       username: req.params.username 
     }).select('-password')
-      .then(user=> {
+      .then(user => {
         if (!user) return res.sendStatus(404)
         return res.json(user)
       })
