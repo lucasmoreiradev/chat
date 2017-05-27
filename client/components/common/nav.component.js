@@ -18,7 +18,7 @@ import { RouterLink } from '@angular/router';
         <a routerLink="/profile/{{ currentUser.username }}" class="perfil">
           Profile
         </a>
-        <a class="logout">Logout</a>
+        <a class="logout" href="/logout">Logout</a>
       </div>
     </nav>
   `
