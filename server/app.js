@@ -21,6 +21,7 @@ const router = require('./router')
 const publicPath = path.join(__dirname, '../public/')
 
 // Mongoose connection
+mongoose.promise = global.Promise
 mongoose.connect('mongodb://localhost/chat-dev')
 
 // Middlewares
@@ -53,10 +54,10 @@ router.get('*', (req, res, next) => {
 app.use('/js', express.static(path.join(publicPath, '/js')))
 // app.use('/assets', express.static(path.join(publicPath, '/assets')))
 
+require('./auth/auth')(app)
+
 // Use the router
 app.use('/', router)
-
-require('./auth/auth')(app)
 
 // Handle unmatched routes
 const handle404 = (err, req, res, next) => {

@@ -8,13 +8,15 @@ const User = require('../models/User')
 module.exports = (app) => {
 
   passport.serializeUser((user, done) => {
-    done(null, user.id)
+    done(null, user._id)
   })
 
   passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => {
-      done(null, user)
-    }).catch(err => done(err, null))
+    User.findOne({ _id: id })
+      .then(user => {
+        done(null, user)
+      })
+      .catch(err => done(err, null))
   })
 
   require('./strategies/local')(passport)
