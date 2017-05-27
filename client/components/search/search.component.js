@@ -29,6 +29,9 @@ import 'rxjs/add/operator/distinctUntilChanged'
             <img>
             <p>{{ result.username }}</p>
           </a>
+          <div class="info">
+            {{ result.description }}
+          </div>
         </div>
       </div>
     </div>
