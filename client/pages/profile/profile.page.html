@@ -1,5 +1,8 @@
 <div class="profile">
-  <header>
+  <header [ngStyle]="{ 'background-image': !user.cover_url ? '' : 'url(' + user.cover_url + ')' }">
+    <figure class="loader" *ngIf="shouldHide(user.cover_url)"></figure>
+    <upload allowd="image/*" kind="cover" (path)="user.cover_url = $event">
+    </upload>
     <div class="avatar">
       <img [src]="user.avatar_url" *ngIf="user.avatar_url; else loader">
       <ng-template #loader>

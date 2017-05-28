@@ -7,6 +7,10 @@
     background-color: $support-color;
     background-position: center;
     background-size: cover;
+    .loader {
+      top: 40%;
+      left: 48%;
+    }
     upload {
       position: absolute;
       input:before {

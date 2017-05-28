@@ -31,6 +31,6 @@ export class ProfilePage {
     this.sub.unsubscribe() 
   }
   shouldHide (toCompare) {
-    return typeof toCompare === 'undefined'
+    return !toCompare 
   }
 }
