@@ -14,7 +14,7 @@ import { ApiService } from '../../services/api.service'
         </div>
         <p>{{ user.username }}</p>
       </div>
-      <div class="detail">
+      <div class="detail" *ngIf="user.description">
         <div class="label">
           <span>Bio</span>
         </div>
