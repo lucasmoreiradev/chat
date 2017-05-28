@@ -22,7 +22,8 @@ export const routes = [
         path: 'profile/:username',
         component: ProfilePage,
         resolve: {
-          user: UserResolver
+          user: UserResolver,
+          currentUser: CurrentUserResolver
         }
       }
     ],

@@ -1,7 +1,10 @@
 <div class="profile">
   <header [ngStyle]="{ 'background-image': !user.cover_url ? '' : 'url(' + user.cover_url + ')' }">
     <figure class="loader" *ngIf="shouldHide(user.cover_url)"></figure>
-    <upload allowd="image/*" kind="cover" (path)="user.cover_url = $event">
+    <upload 
+      allowd="image/*" kind="cover"
+      (path)="user.cover_url = $event"
+      *ngIf="user._id === currentUser._id">
     </upload>
     <div class="avatar">
       <img [src]="user.avatar_url" *ngIf="user.avatar_url; else loader">
@@ -9,13 +12,16 @@
         <figure class="loader"></figure>
       </ng-template>
       <upload allowerd="image/jpeg,image/png"
+        *ngIf="user._id === currentUser._id"
         kind="avatar" (path)="onChangeAvatar($event)">
       </upload>
     </div>
   </header>
   <div class="grid">
     <div class="info-col">
-      <profile-details [user]="user"></profile-details>
+      <profile-details [user]="user"
+        [editable]="user._id === currentUser._id">
+      </profile-details>
     </div>
   </div>
 </div>

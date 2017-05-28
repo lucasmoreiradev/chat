@@ -25,7 +25,7 @@ import 'rxjs/add/operator/distinctUntilChanged'
       </div>
       <div class="results" *ngIf="results">
         <div class="result" *ngFor="let result of results">
-          <a class="name" routerLink="profile/{{ result.username }}">
+          <a class="name" routerLink="/profile/{{ result.username }}">
             <img [src]="result.avatar_url">
             <p>{{ result.username }}</p>
           </a>

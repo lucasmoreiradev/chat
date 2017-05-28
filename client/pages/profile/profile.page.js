@@ -19,8 +19,9 @@ export class ProfilePage {
   }
   ngOnInit () {
     this.sub = this.route.data
-      .subscribe(({ user }) => {
+      .subscribe(({ user, currentUser }) => {
         this.user = user
+        this.currentUser = currentUser
     })
   }
   onChangeAvatar (path) {

@@ -21,7 +21,8 @@ import { ApiService } from '../../services/api.service'
         <p>{{ user.description }}</p>
       </div>
       <div class="detail">
-        <p>Você possui 19 conexões</p>
+        <p *ngIf="!editable">{{ user.username }} possui 19 conexões</p>
+        <p *ngIf="editable"> Você possui 19 conexões</p>
       </div>
     </div>
     <form class="editor" name="profile" [hidden]="!editing">
@@ -32,13 +33,15 @@ import { ApiService } from '../../services/api.service'
         Salvar 
       </button>
     </form>
-    <button class="editing" (click)="toggleEditing()" *ngIf="!editing">
+    <button class="editing" (click)="toggleEditing()"
+      *ngIf="!editing && editable">
       Editar
     </button>
   `
 })
 export class ProfileDetailsComponent {
   @Input() user
+  @Input() editable 
 
   constructor (api: ApiService) {
     this.api = api
