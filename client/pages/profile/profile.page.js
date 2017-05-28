@@ -30,4 +30,7 @@ export class ProfilePage {
   ngOnDestroy () {
     this.sub.unsubscribe() 
   }
+  shouldHide (toCompare) {
+    return typeof toCompare === 'undefined'
+  }
 }

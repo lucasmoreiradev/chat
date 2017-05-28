@@ -1,7 +1,10 @@
 <div class="profile">
   <header>
     <div class="avatar">
-      <img [src]="user.avatar_url">
+      <img [src]="user.avatar_url" *ngIf="user.avatar_url; else loader">
+      <ng-template #loader>
+        <figure class="loader"></figure>
+      </ng-template>
       <upload allowerd="image/jpeg,image/png"
         kind="avatar" (path)="onChangeAvatar($event)">
       </upload>
