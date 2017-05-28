@@ -17,6 +17,7 @@ module.exports = (passport) => {
       if (user) return done(null, false)
 
       let newUser = new User()
+      newUser.avatar_url = "https://api.adorable.io/avatars/285/" + req.body.username
       newUser.email = email
       newUser.username = req.body.username
       newUser.password = newUser.generateHash(password)

@@ -16,6 +16,7 @@ router.get(authedRoutes, Middlewares.ensureAuthenticated(), (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 })
 
+require('./endpoints/upload')(router)
 require('./endpoints/user')(router)
 
 module.exports = router

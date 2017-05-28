@@ -7,6 +7,12 @@
     background-color: $support-color;
     background-position: center;
     background-size: cover;
+    upload {
+      position: absolute;
+      input:before {
+        background: url('/assets/icons/camera.png') $primary-color no-repeat center/cover;
+      }
+    }
     .avatar {
       position: absolute;
       top: 90%;
@@ -16,6 +22,11 @@
       img {
         width: 100%;
         height: 100%;
+      }
+      upload {
+        top: 3%;
+        left: 3%;
+        right: auto;
       }
     }
   }

@@ -30,6 +30,9 @@ if (process.env.NODE_ENV != 'production') {
   app.use(morgan('dev'))
 }
 app.use(helmet())
+app.use(bodyParser.json())
+app.use(bodyParser.raw({ limit: '400mb', type: 'application/octect-stream' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(session({
   key: 'express.sid',
   secret: 'keyboard cat',
@@ -38,10 +41,11 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }
 }))
-app.use(bodyParser.json())
 app.use(passport.initialize())
 app.use(passport.session())
 //app.use(favicon(path.join(publicPath, '/favicon.ico')))
+
+require('./auth/auth')(app)
 
 // Catch all undefined routes
 router.get('*', (req, res, next) => {
@@ -52,9 +56,8 @@ router.get('*', (req, res, next) => {
 
 // Serve up static files
 app.use('/js', express.static(path.join(publicPath, '/js')))
-// app.use('/assets', express.static(path.join(publicPath, '/assets')))
+app.use('/assets', express.static(path.join(publicPath, '/assets')))
 
-require('./auth/auth')(app)
 
 // Use the router
 app.use('/', router)
