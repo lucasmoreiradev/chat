@@ -25,12 +25,14 @@ import 'rxjs/add/operator/distinctUntilChanged'
       </div>
       <div class="results" *ngIf="results">
         <div class="result" *ngFor="let result of results">
-          <a class="name" routerLink="/profile/{{ result.username }}">
-            <img [src]="result.avatar_url">
-            <p>{{ result.username }}</p>
-          </a>
-          <div class="info">
-            {{ result.description }}
+          <div class="row">
+            <a class="name" routerLink="/profile/{{ result.username }}">
+              <img [src]="result.avatar_url">
+              <p>{{ result.username }}</p>
+            </a>
+            <div class="info">
+              {{ result.description }}
+            </div>
           </div>
         </div>
       </div>
