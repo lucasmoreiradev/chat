@@ -1,0 +1,19 @@
+requests {
+  .requests {
+    padding: 0 2vh;
+    .request-btn {
+      background: $accent-color;
+    }
+    .waiting {
+      color: $primary-color;
+      font-weight: 600;
+      font-size: 17px;
+    }
+    .accept {
+      background: $accent-color;
+    }
+    .decline {
+      background: $warn-color;
+    }
+  }
+}

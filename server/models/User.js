@@ -13,6 +13,7 @@ const schema = new Schema({
   cover_url: String,
   description: String,
   active: { type: Boolean, default: true },
+  friends: [{ type: Schema.ObjectId, ref: 'User' }]
 })
 
 schema.plugin(timestemp)

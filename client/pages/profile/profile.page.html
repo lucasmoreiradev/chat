@@ -12,16 +12,19 @@
         <figure class="loader"></figure>
       </ng-template>
       <upload allowerd="image/jpeg,image/png"
-        *ngIf="user._id === currentUser._id"
-        kind="avatar" (path)="onChangeAvatar($event)">
+              *ngIf="user._id === currentUser._id"
+              kind="avatar" (path)="onChangeAvatar($event)">
       </upload>
     </div>
   </header>
   <div class="grid">
     <div class="info-col">
       <profile-details [user]="user"
-        [editable]="user._id === currentUser._id">
+                        [editable]="user._id === currentUser._id">
       </profile-details>
+      <requests [user]="user" [currentUser]="currentUser"
+                [request]="request">
+      </requests>
     </div>
   </div>
 </div>
