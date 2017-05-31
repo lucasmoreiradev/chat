@@ -1,7 +1,8 @@
 'use strict';
 
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core'
+import { ActivatedRoute, RouterLink } from '@angular/router'
+import { NgFor } from '@angular/common'
 
 @Component({
   selector: 'friends',
@@ -11,8 +12,29 @@ import { Component } from '@angular/core';
         <span [style.display]="block">
           Fale com seus amigos abaixo:
         </span>
+          <ul>
+            <li *ngFor="let friend of currentUser.friends">
+              <div class="friend">
+                <img [src]="friend.avatar_url">
+                <div class="info">
+                  <p>
+                    @{{ friend.username }}
+                  </p>
+                  <span class="last-seen">
+                    visto por último: 10/10/2010 10:10:10
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
       </div>
     </div>
   `
 })
-export class FriendsComponent {}
+export class FriendsComponent {
+  @Input() currentUser
+
+  constructor (route: ActivatedRoute) {
+    this.route = route
+  }
+}

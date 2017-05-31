@@ -8,7 +8,7 @@ import { NavComponent } from '../../components/common/nav.component'
   template: `
     <navigation [currentUser]="currentUser"></navigation>
     <div class="container">
-      <friends></friends>
+      <friends [currentUser]="currentUser"></friends>
       <router-outlet class="child-views"></router-outlet>
     </div>
   `
@@ -19,7 +19,8 @@ export class DashboardPage {
     this.route = route 
   }
   ngOnInit () {
-    this.sub = this.route.data.subscribe(({ currentUser }) => this.currentUser = currentUser)
+    this.sub = this.route.data
+      .subscribe(({ currentUser }) => this.currentUser = currentUser)
   }
   ngOnDestroy () {
     this.sub.unsubscribe()

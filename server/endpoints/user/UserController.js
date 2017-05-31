@@ -10,7 +10,9 @@ class UserController {
   }
 
   static me (req, res) {
-    User.findById(req.user._id).select('-password')
+    User.findById(req.user._id)
+      .select('-password')
+      .populate('friends')
       .then((err, user) => {
         if (err) return res.send(err)
         if (!user) return res.sendStatus(404)

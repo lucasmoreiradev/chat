@@ -1,13 +1,46 @@
 friends {
   height: 100%;
   background-color: $secondary-color;
-  z-index: 100;
   .friends-container {
     width: 27vw;
     height: 100%;
+    padding: 8px;
   }
   span {
     color: $support-color;
     font-size: 11px;
+  }
+  img {
+    &.active {
+      border: 3px solid $success-color;
+    }
+    &.inactive {
+      border: 3px solid lighten($support-color, 28%); 
+    }
+  }
+  .friend {
+    display: flex;
+    width: 100%;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    cursor: pointer;
+    img {
+      width: 44px;
+      height: 44px;
+      background: $support-color;
+      align-self: center;
+    }
+    .info {
+      align-self: center;
+      padding-left: 8px;
+      p {
+        color: white;
+        font-weight: 100;
+      }
+    }
+    .last-seen {
+      font-size: 11px;
+      padding-top: 8px;
+    }
   }
 }
