@@ -29,6 +29,7 @@ friends {
       height: 44px;
       background: $support-color;
       align-self: center;
+      border-radius: 100%;
     }
     .info {
       align-self: center;
@@ -42,5 +43,9 @@ friends {
       font-size: 11px;
       padding-top: 8px;
     }
+  }
+  .friend:hover {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
   }
 }

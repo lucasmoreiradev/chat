@@ -43,7 +43,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-//app.use(favicon(path.join(publicPath, '/favicon.ico')))
+app.use(favicon(path.join(publicPath, '/favicon.ico')))
 
 require('./auth/auth')(app)
 

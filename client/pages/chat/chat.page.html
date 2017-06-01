@@ -1,0 +1,24 @@
+<div class="group-message">
+  <div class="messages">
+    <div class="gm" *ngFor="let message of messages">
+      <div class="message-container" *ngIf="message">
+        <div class="user">
+          <img [src]="message.sender.avatar_url">
+        </div>
+        <div class="message">
+          <a class="username" routerLink="/profile/{{ message.sender.username }}">
+            {{ message.sender.username }}
+          </a>
+          <span>{{ message.created_at | date: 'MMM dd HH:mm'}}</span>
+          <div class="message-text">{{ message.text }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form name="gm" class="send-gm" (ngSubmit)="sendMessage()">
+    <textarea [(ngModel)]="message.text" name="message"></textarea>
+    <button class="send" [disabled]="!message.text">
+      Enviar 
+    </button>
+  </form>
+</div>

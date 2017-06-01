@@ -1,0 +1,73 @@
+.group-message {
+  width: 100%;
+  height: 100%;
+  background: $tertiary-color;
+  .messages {
+    position: relative;
+    width: 100%;
+    height: 85%;
+    overflow-y: scroll;
+  }
+  .gm {
+    position: relative;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .message-container {
+    display: flex;
+    padding: 8px 24px;
+    .message {
+      max-width: 100%;
+      padding: 0 8px;
+      box-sizing: border-box; 
+      .username {
+        font-weight: 700;
+        color: $secondary-color;
+      }
+    }
+    img {
+      width: 44px;
+      height: 44px;
+      border-radius: 100%;
+    }
+    span {
+      font-weight: 200;
+    }
+    .user {
+      position: relative;
+      top: 90%;
+      color: $success-color;
+      font-weight: 700;
+    }
+    .message-text {
+      padding: 6px 0;
+    }
+  }
+  .send-gm {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin-left: 30px;
+    height: 15%;
+    padding: 10px;
+    align-self: center;
+    box-sizing: border-box;
+    textarea {
+      width: 85%;
+      max-height: 100%;
+      padding: 16px 24px;
+      outline: none;
+      resize: none;
+      box-sizing: border-box;
+      border-radius: 3px;
+      border: 2px solid $accent-color;
+    }
+    button {
+      width: 10%;
+      margin: 0 0 0 5px;
+      padding: 0;
+      background: $accent-color;
+    }
+  }
+}

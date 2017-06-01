@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component, Input } from '@angular/core'
-import { ActivatedRoute, RouterLink } from '@angular/router'
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 import { NgFor } from '@angular/common'
 
 @Component({
@@ -14,7 +14,7 @@ import { NgFor } from '@angular/common'
         </span>
           <ul>
             <li *ngFor="let friend of currentUser.friends">
-              <div class="friend">
+              <div class="friend" (click)="handleDm(friend)">
                 <img [src]="friend.avatar_url">
                 <div class="info">
                   <p>
@@ -34,7 +34,11 @@ import { NgFor } from '@angular/common'
 export class FriendsComponent {
   @Input() currentUser
 
-  constructor (route: ActivatedRoute) {
-    this.route = route
+  constructor (activatedRoute: ActivatedRoute, router: Router) {
+    this.router = router
+    this.activatedRoute = activatedRoute
+  }
+  handleDm (friend) {
+    this.router.navigate([`/chat/${friend.username}`])
   }
 }

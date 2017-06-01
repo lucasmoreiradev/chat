@@ -6,7 +6,7 @@ const publicPath = path.join(__dirname, '../public/');
 const Middlewares = require('./utils/Middlewares') 
 
 const appRoutes = [ '/login', '/signup' ]
-const authedRoutes = [ '/profile/*', '/' ]
+const authedRoutes = [ '/profile/*', '/', '/chat/*' ]
 
 router.get(appRoutes, Middlewares.handleAuthenticated(), (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
@@ -19,5 +19,6 @@ router.get(authedRoutes, Middlewares.ensureAuthenticated(), (req, res) => {
 require('./endpoints/upload')(router)
 require('./endpoints/user')(router)
 require('./endpoints/request')(router)
+require('./endpoints/message')(router)
 
 module.exports = router
