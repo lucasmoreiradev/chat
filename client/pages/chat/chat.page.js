@@ -3,6 +3,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { ApiService } from '../../services/api.service'
+import { SocketService } from '../../services/socket.service'
 
 import * as template from './chat.page.html'
 
@@ -13,9 +14,10 @@ import * as template from './chat.page.html'
   `
 })
 export class ChatPage {
-  constructor (api: ApiService, route: ActivatedRoute) {
+  constructor (api: ApiService, route: ActivatedRoute, socket: SocketService) {
     this.api = api
     this.route = route
+    this.socket = socket
   }
   ngOnInit () {
     this.sub = this.route.data
@@ -29,6 +31,10 @@ export class ChatPage {
       .subscribe(messages => {
         this.messages = messages
       })
+
+    this.socket.sync(`message:${this.user._id}`, message => {
+      this.messages.push(message)
+    })
 
     this.message = {}
   }

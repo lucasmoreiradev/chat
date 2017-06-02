@@ -13,4 +13,8 @@ const schema = new Schema({
 
 schema.plugin(timestemp)
 
+schema.post('save', doc => {
+  schema.emit('newMessage', doc)
+})
+
 module.exports = mongoose.model('Message', schema)

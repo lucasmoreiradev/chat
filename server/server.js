@@ -3,6 +3,7 @@
 const app = require('./app');
 const http = require('http');
 const chalk = require('chalk');
+const sockets = require('./sockets')
 
 let port = process.env.PORT || 9000;
 
@@ -18,4 +19,6 @@ httpServer.on('listening',  () => {
   console.log(chalk.blue(`Express server is listening on ${httpServer.address().port}`))
 });
 
-httpServer.listen(port);
+httpServer.listen(port, () => {
+  sockets.connectTo(httpServer)
+});

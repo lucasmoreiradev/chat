@@ -25,8 +25,7 @@ class MessageController {
         }
       ]
     })
-    .populate('receipend')
-    .populate('sender')
+    .populate('receipend sender', '-password')
     .then(message => res.json(message))
     .catch(err => res.send(err).status(500))
   }

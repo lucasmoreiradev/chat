@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app.routes'
 import { AuthService } from './services/auth.service'
 import { ApiService } from './services/api.service'
 import { EventService } from './services/event.service'
+import { SocketService } from './services/socket.service'
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { EventService } from './services/event.service'
   providers: [
     EventService,
     AuthService,
-    ApiService
+    ApiService,
+    SocketService
   ],
   declarations: [
     AppComponent
