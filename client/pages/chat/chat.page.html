@@ -16,7 +16,7 @@
     </div>
   </div>
   <form name="gm" class="send-gm" (ngSubmit)="sendMessage()">
-    <textarea [(ngModel)]="message.text" name="message"></textarea>
+    <textarea [(ngModel)]="message.text" name="message" #textarea (keydown)="handleMessage($event)"></textarea>
     <button class="send" [disabled]="!message.text">
       Enviar 
     </button>

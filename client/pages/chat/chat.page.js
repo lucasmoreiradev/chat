@@ -15,6 +15,7 @@ import * as template from './chat.page.html'
 })
 export class ChatPage {
   @ViewChild('directMessages') messagesEl
+  @ViewChild('textarea') textareaEl
 
   constructor (api: ApiService, route: ActivatedRoute, socket: SocketService, cdr: ChangeDetectorRef) {
     this.api = api
@@ -48,6 +49,9 @@ export class ChatPage {
 
     this.message = {}
   }
+  ngAfterViewInit() {
+    this.textareaEl.nativeElement.focus()
+  }
   sendMessage () {
     const message = {
       receipend: this.user._id,
@@ -65,6 +69,12 @@ export class ChatPage {
   }
   ngOnDestroy () {
     this.sub.unsubscribe()
+    this.socket.unsync(`message:${this.user._id}`)
+  }
+  handleMessage (event) {
+    if (event.keyCode === 13) {
+      this.sendMessage()
+    }
   }
   handleScroll () {
     this.cdr.detectChanges()
