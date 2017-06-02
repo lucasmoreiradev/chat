@@ -29,8 +29,10 @@ export class ChatPage {
         this.currentUser = currentUser
       })
 
-    this.api
-      .fetch(`messages/direct/${this.user._id}`)
+    this.api.update(`messages/see/${this.user._id}`, { seen: true })
+      .catch(err => console.log(err))
+
+    this.api.fetch(`messages/direct/${this.user._id}`)
       .subscribe(messages => {
         this.messages = messages
         this.handleScroll()
@@ -39,6 +41,9 @@ export class ChatPage {
     this.socket.sync(`message:${this.user._id}`, message => {
       this.messages.push(message)
       this.handleScroll()
+
+      this.api.update(`messages/seen/${message._id}`, { seen: true })
+        .catch(err => console.log(err))
     })
 
     this.message = {}

@@ -31,7 +31,30 @@ class MessageController {
   }
 
   static seen (req, res) {
+    Message.findById(req.params.id)
+    .then(message => {
+      let updated = _.merge(message, req.body)
+      updated.save()
+        .then(message => {
+          return res.json(message)
+        })
+        .catch(err => res.send(err).status(500))
+    })
+    .catch(err => res.send(err).status(500))
+  }
 
+  static see (req, res) {
+    Message.find({
+      receipend: req.user._id,
+      sender: req.params.id
+    })
+      .then(messages => {
+        for (let message of messages) {
+          let updated = _.merge(message, req.body)
+          updated.save()
+        }
+      })
+      .catch(err => res.send(err).status(500))
   }
 
 }
