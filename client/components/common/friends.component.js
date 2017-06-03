@@ -3,6 +3,8 @@
 import { Component, Input } from '@angular/core'
 import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 import { NgFor } from '@angular/common'
+import { SocketService } from '../../services/socket.service'
+import * as findIndex from 'lodash/findIndex'
 
 @Component({
   selector: 'friends',
@@ -35,11 +37,24 @@ import { NgFor } from '@angular/common'
 export class FriendsComponent {
   @Input() currentUser
 
-  constructor (activatedRoute: ActivatedRoute, router: Router) {
+  constructor (activatedRoute: ActivatedRoute, router: Router, socket: SocketService) {
     this.router = router
     this.activatedRoute = activatedRoute
+    this.socket = socket
+  }
+  ngOnInit () {
+    this.addListeners()
   }
   handleDm (friend) {
     this.router.navigate([`/chat/${friend.username}`])
+  }
+  addListeners () {
+    this.currentUser.friends
+      .forEach(({ _id }) => {
+        this.socket.sync(`user:${_id}:save`, user => {
+          let index = findIndex(this.currentUser.friends, friend => friend._id === user._id)
+          this.currentUser.friends[index] = user
+        })
+      })
   }
 }

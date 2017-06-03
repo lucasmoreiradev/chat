@@ -25,4 +25,8 @@ schema.methods.validPassword = (attempt, password) => {
   return bcrypt.compareSync(attempt, password)
 }
 
+schema.post('save', doc => {
+  schema.emit('newUser', doc)
+})
+
 module.exports = mongoose.model('User', schema)
