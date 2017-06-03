@@ -10,6 +10,7 @@ module.exports = (sockets) => {
         .populate('receipend sender', '-password')
         .then(message => {
           sockets.to(`user:${message.receipend._id}`).emit(`message:${message.sender._id}`, message)
+          sockets.to(`user:${message.receipend._id}`).emit(`user:message`, message)
         })
         .catch(err => console.log(err))
     }

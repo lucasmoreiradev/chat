@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core'
 import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 import { NgFor } from '@angular/common'
 import { SocketService } from '../../services/socket.service'
+import { ApiService } from '../../services/api.service'
 import * as findIndex from 'lodash/findIndex'
 
 @Component({
@@ -21,10 +22,10 @@ import * as findIndex from 'lodash/findIndex'
                 <div class="info">
                   <p [class]="friend.active ? 'active' : 'inactive'">
                     @{{ friend.username }}
-                    <span *ngIf="friend.has_unread_message" class="notification">!</span>
+                    <span *ngIf="friend.notification" class="notification">!</span>
                   </p>
                   <span class="last-seen">
-                    visto por último: {{ friend.active ? 'ativo agora' : friend.update_at | date: 'MMM dd HH:mm' }} 
+                    visto por último: {{ friend.active ? 'ativo agora' : friend.updated_at | date: 'MMM dd HH:mm' }} 
                   </span>
                 </div>
               </div>
@@ -37,16 +38,31 @@ import * as findIndex from 'lodash/findIndex'
 export class FriendsComponent {
   @Input() currentUser
 
-  constructor (activatedRoute: ActivatedRoute, router: Router, socket: SocketService) {
+  constructor (activatedRoute: ActivatedRoute, router: Router, socket: SocketService, api: ApiService) {
     this.router = router
     this.activatedRoute = activatedRoute
     this.socket = socket
+    this.api = api
   }
   ngOnInit () {
     this.addListeners()
+    this.api.fetch(`messages/unseen/${this.currentUser._id}`)
+      .subscribe(messages => {
+        if (messages.length > 0) {
+          const msg = messages[0]
+          let index = findIndex(this.currentUser.friends, friend => friend._id === msg.sender._id)
+          msg.sender.notification = true
+          this.currentUser.friends[index] = msg.sender 
+        }
+      })
   }
-  handleDm (friend) {
-    this.router.navigate([`/chat/${friend.username}`])
+  handleDm (f) {
+    if (f.notification) {
+      f.notification = false
+      let index = findIndex(this.currentUser.friends, friend => friend._id === f._id)
+      this.currentUser.friends[index] = f  
+    }
+    this.router.navigate([`/chat/${f.username}`])
   }
   addListeners () {
     this.currentUser.friends
@@ -54,6 +70,14 @@ export class FriendsComponent {
         this.socket.sync(`user:${_id}:save`, user => {
           let index = findIndex(this.currentUser.friends, friend => friend._id === user._id)
           this.currentUser.friends[index] = user
+        })
+
+        this.socket.sync(`user:message`, message => {
+          if (message.sender._id === _id && !message.seen) {
+            let index = findIndex(this.currentUser.friends, friend => friend._id === message.sender._id)
+            message.sender.notification = true
+            this.currentUser.friends[index] = message.sender 
+          }
         })
       })
   }

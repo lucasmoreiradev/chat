@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const timestemp = require('./plugins/timestemp')
 const bcrypt = require('bcryptjs')
 
 const schema = new Schema({
@@ -14,9 +13,10 @@ const schema = new Schema({
   description: String,
   active: { type: Boolean, default: false },
   friends: [{ type: Schema.ObjectId, ref: 'User' }]
+},
+{
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 })
-
-schema.plugin(timestemp)
 
 schema.methods.generateHash = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)

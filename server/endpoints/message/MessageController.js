@@ -57,6 +57,18 @@ class MessageController {
       .catch(err => res.send(err).status(500))
   }
 
+  static unseen (req, res) {
+    Message.find({
+      receipend: req.params.id,
+      seen: false
+    })
+      .populate('receipend sender', '-password')
+      .then(messages => {
+        return res.json(messages)
+      })
+      .catch(err => console.log(err).status(500))
+  }
+
 }
 
 module.exports = MessageController 
