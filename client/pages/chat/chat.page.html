@@ -5,13 +5,15 @@
       <div class="message-container" *ngIf="message">
         <div class="user">
           <img [src]="message.sender.avatar_url">
+          <span>{{ message.seen && message.receipent._id !=
+            currentUser._id ? '&#x2713;' : '' }}</span>
         </div>
         <div class="message">
           <a class="username" routerLink="/profile/{{ message.sender.username }}">
             {{ message.sender.username }}
           </a>
           <span>{{ message.created_at | date: 'MMM dd HH:mm'}}</span>
-          <div class="message-text">{{ message.text }}</div>
+          <div class="message-text">{{ message.text }}</div> 
         </div>
       </div>
     </div>

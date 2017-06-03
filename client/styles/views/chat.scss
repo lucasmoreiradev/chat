@@ -39,6 +39,14 @@
       top: 90%;
       color: $success-color;
       font-weight: 700;
+      span {
+        position: absolute;
+        top: 90%;
+        left: 100%;
+        color: $success-color;
+        font-size: 18px;
+        font-weight: 700;
+      }
     }
     .message-text {
       padding: 6px 0;
