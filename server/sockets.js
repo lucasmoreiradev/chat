@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const chalk = require('chalk')
+const UserUtils = require('./utils/UserUtils')
 
 const bindListeners = (io) => {
   // Auth and attach req.user to the socket
@@ -20,11 +21,14 @@ const bindListeners = (io) => {
   io.on('connection', (socket) => {
     if (!socket.request.user) return 
 
+    UserUtils.handlePresence(socket.request.user._id, true)
+
     socket.join(`user:${socket.request.user._id}`)
     console.log(chalk.yellow(`socket-io: ${socket.request.user.username} connected`))
 
     socket.on('disconnect', () => {
       console.log(chalk.yellow(`socket-io: ${socket.request.user.username} disconnected`))
+      UserUtils.handlePresence(socket.request.user._id, false)
     })
   })
 

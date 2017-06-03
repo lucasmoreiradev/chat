@@ -15,13 +15,14 @@ import { NgFor } from '@angular/common'
           <ul>
             <li *ngFor="let friend of currentUser.friends">
               <div class="friend" (click)="handleDm(friend)">
-                <img [src]="friend.avatar_url">
+                <img [src]="friend.avatar_url" [class]="friend.active ? 'active' : 'inactive'">
                 <div class="info">
-                  <p>
+                  <p [class]="friend.active ? 'active' : 'inactive'">
                     @{{ friend.username }}
+                    <span *ngIf="friend.has_unread_message" class="notification">!</span>
                   </p>
                   <span class="last-seen">
-                    visto por último: 10/10/2010 10:10:10
+                    visto por último: {{ friend.active ? 'ativo agora' : friend.update_at | date: 'MMM dd HH:mm' }} 
                   </span>
                 </div>
               </div>

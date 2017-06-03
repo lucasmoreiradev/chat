@@ -72,7 +72,7 @@ export class ChatPage {
     this.socket.unsync(`message:${this.user._id}`)
   }
   handleMessage (event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && this.message.text) {
       this.sendMessage()
     }
   }

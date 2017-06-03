@@ -43,6 +43,13 @@ friends {
       font-size: 11px;
       padding-top: 8px;
     }
+    .notification {
+      border: 3px solid red;
+      border-radius: 20%;
+      color: red;
+      font-weight: 500;
+      padding: 1px;
+    }
   }
   .friend:hover {
     background: rgba(0, 0, 0, 0.2);

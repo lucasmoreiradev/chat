@@ -12,7 +12,7 @@ const schema = new Schema({
   avatar_url: String,
   cover_url: String,
   description: String,
-  active: { type: Boolean, default: true },
+  active: { type: Boolean, default: false },
   friends: [{ type: Schema.ObjectId, ref: 'User' }]
 })
 
