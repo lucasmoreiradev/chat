@@ -13,7 +13,7 @@ import * as findIndex from 'lodash/findIndex'
     <div class="friends-container">
       <div class="friends">
         <span [style.display]="block">
-          Fale com seus amigos abaixo:
+          {{ currentUser.friends.length === 0 ? 'Você ainda não possui amigos adicionados! 😕' : 'Fale com seus amigos abaixo: '}}
         </span>
           <ul>
             <li *ngFor="let friend of currentUser.friends">

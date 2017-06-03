@@ -1,6 +1,6 @@
 'use strict';
 
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { NgIf } from '@angular/common'
 import { ApiService } from '../../services/api.service'
 
@@ -21,8 +21,7 @@ import { ApiService } from '../../services/api.service'
         <p>{{ user.description }}</p>
       </div>
       <div class="detail">
-        <p *ngIf="!editable">{{ user.username }} possui 19 conexões</p>
-        <p *ngIf="editable"> Você possui 19 conexões</p>
+        <p>{{ msg }}</p>
       </div>
     </div>
     <form class="editor" name="profile" [hidden]="!editing">
@@ -45,8 +44,12 @@ export class ProfileDetailsComponent {
 
   constructor (api: ApiService) {
     this.api = api
+    this.msg = ''
   }
 
+  ngOnInit () {
+    this.defineMessageConnections()
+  }
   saveEdit () {
     this.api.update(`users/${this.user._id}`, this.user)
       .then(user => {
@@ -55,5 +58,23 @@ export class ProfileDetailsComponent {
   }
   toggleEditing () {
     this.editing = true
+  }
+  defineMessageConnections () {
+    let user = ''
+    if (this.editable) {
+      user = 'Você'
+    } else {
+      user = this.user.username
+    }
+
+    if (this.user.friends.length !== 0) {
+      if (this.user.friends.length > 1) {
+        this.msg = `${user} possui ${this.user.friends.length} amigos adicionados 😎`
+      } else {
+        this.msg = `${user} possui apenas um amigo adicionado!`
+      }
+    } else {
+      this.msg = `${user} é novo por aqui.. não tem amigos adicionados ainda!`
+    }
   }
 }
