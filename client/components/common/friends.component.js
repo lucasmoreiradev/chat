@@ -72,6 +72,12 @@ export class FriendsComponent {
           this.currentUser.friends[index] = user
         })
 
+        this.socket.sync(`message:${this.currentUser._id}:seen`, message => {
+          let index = findIndex(this.currentUser.friends, friend => friend._id === message.sender._id)
+          message.sender.notification = false
+          this.currentUser.friends[index] = message.sender 
+        })
+
         this.socket.sync(`user:message`, message => {
           if (message.sender._id === _id && !message.seen) {
             let index = findIndex(this.currentUser.friends, friend => friend._id === message.sender._id)

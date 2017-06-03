@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@ang
 import { ActivatedRoute } from '@angular/router'
 import { ApiService } from '../../services/api.service'
 import { SocketService } from '../../services/socket.service'
+import * as map from 'lodash/map'
 
 import * as template from './chat.page.html'
 
@@ -47,6 +48,15 @@ export class ChatPage {
         .catch(err => console.log(err))
     })
 
+    this.socket.sync(`message:${this.user._id}:seen`, message => {
+      message.sender = this.user
+      map(this.messages, (m,i) => {
+        if (m._id === message._id) {
+          return this.messages[i].seen = message.seen
+        }
+      })
+    })
+
     this.message = {}
   }
   ngAfterViewInit() {
@@ -70,6 +80,7 @@ export class ChatPage {
   ngOnDestroy () {
     this.sub.unsubscribe()
     this.socket.unsync(`message:${this.user._id}`)
+    this.socket.unsync(`message:${this.user._id}:seen`)
   }
   handleMessage (event) {
     if (event.keyCode === 13 && this.message.text) {
