@@ -11,21 +11,21 @@ class MessageController {
       })
       .catch(err => res.send(err).status(500))
   }
-   
+
   static direct (req, res) {
     Message.find({
       $or: [
         {
-          receipend: req.user._id,
+          receipent: req.user._id,
           sender: req.params.sender
         },
         {
-          receipend: req.params.sender,
+          receipent: req.params.sender,
           sender: req.user._id
         }
       ]
     })
-    .populate('receipend sender', '-password')
+    .populate('receipent sender', '-password')
     .then(message => res.json(message))
     .catch(err => res.send(err).status(500))
   }
@@ -45,7 +45,7 @@ class MessageController {
 
   static see (req, res) {
     Message.find({
-      receipend: req.user._id,
+      receipent: req.user._id,
       sender: req.params.id
     })
       .then(messages => {
@@ -59,10 +59,10 @@ class MessageController {
 
   static unseen (req, res) {
     Message.find({
-      receipend: req.params.id,
+      receipent: req.params.id,
       seen: false
     })
-      .populate('receipend sender', '-password')
+      .populate('receipent sender', '-password')
       .then(messages => {
         return res.json(messages)
       })
@@ -71,5 +71,5 @@ class MessageController {
 
 }
 
-module.exports = MessageController 
+module.exports = MessageController
 

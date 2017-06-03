@@ -54,7 +54,7 @@ export class ChatPage {
   }
   sendMessage () {
     const message = {
-      receipend: this.user._id,
+      receipent: this.user._id,
       sender: this.currentUser._id,
       text: this.message.text
     }
@@ -78,7 +78,7 @@ export class ChatPage {
   }
   handleScroll () {
     this.cdr.detectChanges()
-    this.messagesEl.nativeElement.scrollTop = 
+    this.messagesEl.nativeElement.scrollTop =
       this.messagesEl.nativeElement.scrollHeight
   }
 }
