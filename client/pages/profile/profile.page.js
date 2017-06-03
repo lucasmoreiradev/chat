@@ -24,18 +24,18 @@ export class ProfilePage {
       .subscribe(({ user, currentUser }) => {
         this.user = user
         this.currentUser = currentUser
-    })
 
-    this.api
-      .fetch(`requests/pending/${this.user._id}`)
-      .subscribe(request => {
-        this.request = request || {}
-      })
+        this.api
+          .fetch(`requests/pending/${this.user._id}`)
+          .subscribe(request => {
+            this.request = request || {}
+          })
 
-    this.currentUser.friends.forEach(id_friend => {
-      if (id_friend === this.user._id) {
-        this.user.friend = true
-      }
+        this.currentUser.friends.forEach(friend => {
+          if (friend._id === this.user._id) {
+            this.user.friend = true
+          }
+        })
     })
   }
   onChangeAvatar (path) {
