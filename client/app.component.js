@@ -9,6 +9,10 @@ import * as styles from './styles/app.scss'
      ${styles}
    `],
   template: `
+    <ng-progress [showSpinner]="false" color="#5EF38C"
+                 direction="leftToRightIncreased"
+                 positionUsing="translate">
+    </ng-progress>
     <router-outlet></router-outlet>
   `
 })

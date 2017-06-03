@@ -53,6 +53,7 @@ class MessageController {
           let updated = _.merge(message, req.body)
           updated.save()
         }
+        return res.json(messages)
       })
       .catch(err => res.send(err).status(500))
   }
