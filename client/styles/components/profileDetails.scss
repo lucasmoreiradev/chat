@@ -18,7 +18,7 @@
 
 .editor {
   width: 100%;
-  padding: 1vh 0;
+  padding: 4vh 0;
   label, p {
     color: $primary-color;
   }
@@ -37,6 +37,7 @@
   }
   textarea {
     border: none;
+    resize: none;
   }
 }
 
