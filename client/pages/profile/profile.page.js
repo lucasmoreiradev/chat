@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { EventService } from '../../services/event.service'
 import { ApiService } from '../../services/api.service'
+import { SocketService } from '../../services/socket.service'
 
 import * as template from './profile.page.html';
 
@@ -14,10 +15,14 @@ import * as template from './profile.page.html';
   `
 })
 export class ProfilePage {
-  constructor (route: ActivatedRoute, event: EventService, api: ApiService) {
+  constructor (route: ActivatedRoute,
+      event: EventService,
+      api: ApiService,
+      socket: SocketService) {
     this.route = route
     this.event = event
     this.api = api
+    this.socket = socket
   }
   ngOnInit () {
     this.sub = this.route.data
@@ -36,6 +41,11 @@ export class ProfilePage {
             this.user.friend = true
           }
         })
+
+        this.socket.sync(`user:${this.user._id}:save`, user => {
+          console.log('ae')
+          this.user = user
+        })
     })
   }
   onChangeAvatar (path) {
@@ -44,6 +54,7 @@ export class ProfilePage {
   }
   ngOnDestroy () {
     this.sub.unsubscribe() 
+    this.socket.unsync(`user:${this.user._id}:save`)
   }
   shouldHide (toCompare) {
     return !toCompare 

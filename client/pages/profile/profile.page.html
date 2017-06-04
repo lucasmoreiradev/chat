@@ -7,7 +7,9 @@
       *ngIf="user._id === currentUser._id">
     </upload>
     <div class="avatar">
-      <img [src]="user.avatar_url" *ngIf="user.avatar_url; else loader">
+      <img [class]="user.active ? 'active' : 'inactive'"
+           [src]="user.avatar_url" *ngIf="user.avatar_url; else loader">
+      <span class="status">{{ user.active ? 'online' : 'offline' }}</span>
       <ng-template #loader>
         <figure class="loader"></figure>
       </ng-template>
