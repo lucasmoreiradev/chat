@@ -43,7 +43,6 @@ export class ProfilePage {
         })
 
         this.socket.sync(`user:${this.user._id}:save`, user => {
-          console.log('ae')
           this.user = user
         })
     })
