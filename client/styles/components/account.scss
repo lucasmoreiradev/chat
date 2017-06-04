@@ -33,6 +33,11 @@ login, signup {
       margin: 8px auto 0;
       background: $accent-color;
     }
+    p {
+      display: block;
+      margin: 8px 11px 20px;
+      color: white;
+    }
   }
   .name-email {
     display: flex;

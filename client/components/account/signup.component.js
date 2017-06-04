@@ -23,6 +23,7 @@ import { Router } from '@angular/router'
       </div>
       <label>Senha</label>
       <input type="password" [(ngModel)]="model.password" name="email">
+      <p *ngIf="errorMessage"> {{ errorMessage }}</p>
       <button type="submit" (click)="onSubmit()">Cadastrar</button>
       <a routerLink="/login">Login</a>
     </form>
@@ -43,7 +44,10 @@ export class SignupComponent {
         this.router.navigate([''])
       })
       .catch(err => {
-        console.log(err)
+        if (err.status === 401) {
+          return this.errorMessage = 'Este email já está sendo utilizado!'
+        }
+        this.errorMessage = 'Algo deu errado! Tente novamente.'
       })
   }
 }

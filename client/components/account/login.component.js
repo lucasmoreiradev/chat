@@ -13,6 +13,7 @@ import { Router } from '@angular/router'
       <input type="email" [(ngModel)]="model.email" name="email">
       <label>Senha</label>
       <input type="password" [(ngModel)]="model.password" name="password">
+      <p *ngIf="errorMessage"> {{ errorMessage }}</p>
       <button type="submit" (click)="onSubmit()">Entrar</button>
       <a routerLink="/signup">Cadastre-se</a>
     </form>
@@ -33,7 +34,10 @@ export class LoginComponent {
         this.router.navigate(['']);
       })
       .catch(err => {
-        console.log(err)
+        if (err.status === 401) {
+          return this.errorMessage = 'E-mail ou senha incorretos!'
+        }
+        this.errorMessage = 'Algo deu errado! Tente novamente.'
       })
   }
 }

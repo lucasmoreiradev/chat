@@ -74,7 +74,7 @@ export class ProfileDetailsComponent {
         this.msg = `${user} possui apenas um amigo adicionado!`
       }
     } else {
-      this.msg = `${user} é novo por aqui.. não tem amigos adicionados ainda!`
+      this.msg = `${user} é novo por aqui.. não possui amigos adicionados ainda!`
     }
   }
 }
