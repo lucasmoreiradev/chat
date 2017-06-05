@@ -16,15 +16,16 @@ import * as template from './profile.page.html';
 })
 export class ProfilePage {
   constructor (route: ActivatedRoute,
-      event: EventService,
-      api: ApiService,
-      socket: SocketService) {
+    event: EventService,
+    api: ApiService,
+    socket: SocketService) {
     this.route = route
     this.event = event
     this.api = api
     this.socket = socket
   }
   ngOnInit () {
+    this.friend = false
     this.sub = this.route.data
       .subscribe(({ user, currentUser }) => {
         this.user = user
@@ -33,19 +34,39 @@ export class ProfilePage {
         this.api
           .fetch(`requests/pending/${this.user._id}`)
           .subscribe(request => {
-            this.request = request || {}
+            this.request = request
           })
 
-        this.currentUser.friends.forEach(friend => {
-          if (friend._id === this.user._id) {
-            this.user.friend = true
-          }
+        this.socket.sync(`request:approved`, request => {
+          this.friend = true
+          this.request = undefined 
         })
 
         this.socket.sync(`user:${this.user._id}:save`, user => {
           this.user = user
         })
-    })
+
+        this.currentUser.friends.forEach(friend => {
+          if (friend._id === this.user._id) {
+            this.friend = true
+          } else {
+            this.friend = false
+          }
+        })
+
+        this.socket.sync(`request:${this.user._id}:created`, request => {
+          this.request = request
+        })
+
+        this.socket.sync(`request:${this.user._id}:declined`, request => {
+          this.request = undefined 
+        })
+
+        this.socket.sync(`request:${this.user._id}:approved`, request => {
+          this.friend = true
+          this.request = undefined 
+        })
+      })
   }
   onChangeAvatar (path) {
     this.event.changeAvatar(path)
@@ -54,6 +75,8 @@ export class ProfilePage {
   ngOnDestroy () {
     this.sub.unsubscribe() 
     this.socket.unsync(`user:${this.user._id}:save`)
+    this.socket.unsync(`request:${this.user._id}:declined`)
+    this.socket.unsync(`request:approved`)
   }
   shouldHide (toCompare) {
     return !toCompare 

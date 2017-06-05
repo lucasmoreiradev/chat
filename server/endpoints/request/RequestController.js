@@ -16,14 +16,14 @@ class RequestController {
   static match (req, res) {
     Request.findOne({
       $or: [{
-        id_requester: req.user._id,
-        id_requested: req.params.id,
-        approved: false
-      }, 
+        requester: req.user._id,
+        requested: req.params.id,
+        approved: null
+      },
       {
-        id_requester: req.params.id,
-        id_requested: req.user._id,
-        approved: false
+        requester: req.params.id,
+        requested: req.user._id,
+        approved: null
       }]
     })
       .then(request => res.json(request))
@@ -32,21 +32,22 @@ class RequestController {
 
   static update (req, res) {
     Request.findById(req.params.id)
+      .populate('requester requested', '-password')
       .then(request => {
         if (!request) res.sendStatus(400)
 
         const updated = _.merge(request, req.body)
-        
+
         if (updated.approved) {
-          User.findById(request.id_requested)
+          User.findById(request.requested._id)
             .then(requested => {
-              requested.friends.push(request.id_requester)
+              requested.friends.push(request.requester._id)
               requested.save()
             })
 
-          User.findById(request.id_requester)
+          User.findById(request.requester._id)
             .then(requester => {
-              requester.friends.push(request.id_requested)
+              requester.friends.push(request.requested._id)
               requester.save()
             })
         }
@@ -58,5 +59,5 @@ class RequestController {
 
 }
 
-module.exports = RequestController 
+module.exports = RequestController
 

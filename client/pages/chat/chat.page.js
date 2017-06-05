@@ -29,33 +29,33 @@ export class ChatPage {
       .subscribe(({ user, currentUser }) => {
         this.user = user
         this.currentUser = currentUser
+
+        this.api.update(`messages/see/${this.user._id}`, { seen: true })
+          .catch(err => console.log(err))
+
+        this.api.fetch(`messages/direct/${this.user._id}`)
+          .subscribe(messages => {
+            this.messages = messages
+            this.handleScroll()
+          })
+
+        this.socket.sync(`message:${this.user._id}`, message => {
+          this.messages.push(message)
+          this.handleScroll()
+
+          this.api.update(`messages/seen/${message._id}`, { seen: true })
+            .catch(err => console.log(err))
+        })
+
+        this.socket.sync(`message:${this.user._id}:seen`, message => {
+          message.sender = this.user
+          map(this.messages, (m,i) => {
+            if (m._id === message._id) {
+              return this.messages[i].seen = message.seen
+            }
+          })
+        })
       })
-
-    this.api.update(`messages/see/${this.user._id}`, { seen: true })
-      .catch(err => console.log(err))
-
-    this.api.fetch(`messages/direct/${this.user._id}`)
-      .subscribe(messages => {
-        this.messages = messages
-        this.handleScroll()
-      })
-
-    this.socket.sync(`message:${this.user._id}`, message => {
-      this.messages.push(message)
-      this.handleScroll()
-
-      this.api.update(`messages/seen/${message._id}`, { seen: true })
-        .catch(err => console.log(err))
-    })
-
-    this.socket.sync(`message:${this.user._id}:seen`, message => {
-      message.sender = this.user
-      map(this.messages, (m,i) => {
-        if (m._id === message._id) {
-          return this.messages[i].seen = message.seen
-        }
-      })
-    })
 
     this.message = {}
   }

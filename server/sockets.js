@@ -35,6 +35,7 @@ const bindListeners = (io) => {
 
   require('./endpoints/message/socket')(io)
   require('./endpoints/user/socket')(io)
+  require('./endpoints/request/socket')(io)
 }
 
 exports.connectTo = (server) => {

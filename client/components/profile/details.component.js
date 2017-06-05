@@ -20,9 +20,6 @@ import { ApiService } from '../../services/api.service'
         </div>
         <p>{{ user.description }}</p>
       </div>
-      <div class="detail">
-        <p>{{ msg }}</p>
-      </div>
     </div>
     <form class="editor" name="profile" [hidden]="!editing">
       <label>Descrição/Bio</label>
@@ -44,11 +41,6 @@ export class ProfileDetailsComponent {
 
   constructor (api: ApiService) {
     this.api = api
-    this.msg = ''
-  }
-
-  ngOnInit () {
-    this.defineMessageConnections()
   }
   saveEdit () {
     this.api.update(`users/${this.user._id}`, this.user)
@@ -58,23 +50,5 @@ export class ProfileDetailsComponent {
   }
   toggleEditing () {
     this.editing = true
-  }
-  defineMessageConnections () {
-    let user = ''
-    if (this.editable) {
-      user = 'Você'
-    } else {
-      user = this.user.username
-    }
-
-    if (this.user.friends.length !== 0) {
-      if (this.user.friends.length > 1) {
-        this.msg = `${user} possui ${this.user.friends.length} amigos adicionados 😎`
-      } else {
-        this.msg = `${user} possui apenas um amigo adicionado!`
-      }
-    } else {
-      this.msg = `${user} é novo por aqui.. não possui amigos adicionados ainda!`
-    }
   }
 }

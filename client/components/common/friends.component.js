@@ -6,6 +6,7 @@ import { NgFor } from '@angular/common'
 import { SocketService } from '../../services/socket.service'
 import { ApiService } from '../../services/api.service'
 import * as findIndex from 'lodash/findIndex'
+import * as map from 'lodash/map'
 
 @Component({
   selector: 'friends',
@@ -83,6 +84,28 @@ export class FriendsComponent {
             let index = findIndex(this.currentUser.friends, friend => friend._id === message.sender._id)
             message.sender.notification = true
             this.currentUser.friends[index] = message.sender 
+          }
+        })
+
+        this.socket.sync(`request:approved`, request => {
+          if (this.currentUser._id === request.requester._id) {
+            let exists = false;
+            map(this.currentUser.friends, (f, i) => {
+              if (f._id === request.requested._id) exists = true 
+            })
+            if (!exists) {
+              this.currentUser.friends.push(request.requested)
+            }
+          } 
+
+          if (this.currentUser._id === request.requested._id) {
+            let exists = false;
+            map(this.currentUser.friends, (f, i) => {
+              if (f._id === request.requester._id) exists = true 
+            })
+            if (!exists) {
+              this.currentUser.friends.push(request.requester)
+            }
           }
         })
       })
