@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { UploadComponent } from './upload.component' 
+import { PipeModule } from '../../pipes/pipe.module'
 
 @NgModule({
   imports: [
     RouterModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    PipeModule
   ],
   declarations: [
     FriendsComponent,
@@ -22,7 +24,8 @@ import { UploadComponent } from './upload.component'
     RouterModule,
     FormsModule,
     CommonModule,
-    UploadComponent
+    UploadComponent,
+    PipeModule
   ]
 })
 export class SharedModule {}

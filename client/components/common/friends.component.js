@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 import { NgFor } from '@angular/common'
 import { SocketService } from '../../services/socket.service'
 import { ApiService } from '../../services/api.service'
+import { LastupdatedPipe } from '../../pipes/lastupdated'
 import * as findIndex from 'lodash/findIndex'
 import * as map from 'lodash/map'
 
@@ -17,7 +18,7 @@ import * as map from 'lodash/map'
           {{ currentUser.friends.length === 0 ? 'Você ainda não possui amigos adicionados! 😕' : 'Fale com seus amigos abaixo: '}}
         </span>
           <ul>
-            <li *ngFor="let friend of currentUser.friends">
+            <li *ngFor="let friend of currentUser.friends | lastupdated">
               <div class="friend" (click)="handleDm(friend)">
                 <img [src]="friend.avatar_url" [class]="friend.active ? 'active' : 'inactive'">
                 <div class="info">
