@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'lastupdated' })
 export class LastupdatedPipe implements PipeTransform {
-  transform (values) {
+  transform (values, reverse) {
     return values.sort((a, b) => {
       if (b.active || a.active) {
         return b.active - a.active

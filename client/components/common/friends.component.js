@@ -72,6 +72,7 @@ export class FriendsComponent {
         this.socket.sync(`user:${_id}:save`, user => {
           let index = findIndex(this.currentUser.friends, friend => friend._id === user._id)
           this.currentUser.friends[index] = user
+          this.currentUser.friends = [ ...this.currentUser.friends ]
         })
 
         this.socket.sync(`message:${this.currentUser._id}:seen`, message => {
