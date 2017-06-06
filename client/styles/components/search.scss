@@ -5,9 +5,9 @@
     top: 100%;
     left: 0;
     width: 100%;
-    max-height: 90vh;
+    max-height: 40vh;
     background: white;
-    overflow-y: hidden;
+    overflow-y: scroll;
     .fetching {
       display: flex;
       height: 6vh;
