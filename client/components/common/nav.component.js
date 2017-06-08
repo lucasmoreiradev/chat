@@ -16,9 +16,11 @@ import { RouterLink } from '@angular/router';
       </div>
       <div class="controls">
         <a routerLink="/profile/{{ currentUser.username }}" class="perfil">
-          Profile
+          <img [src]="currentUser.avatar_url">
         </a>
-        <a class="logout" href="/logout">Logout</a>
+        <a class="logout" href="/logout">
+          <img src="http://fabounet03.free.fr/Cairo-Dock/themes2.2/Text-White/Text-White/icons/logout.svg"> 
+        </a>
       </div>
     </nav>
   `
