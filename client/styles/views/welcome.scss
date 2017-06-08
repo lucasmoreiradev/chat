@@ -1,0 +1,52 @@
+.welcome {
+  width: 100%;
+  padding: 40px;
+  .emoji {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 43%;
+    font-size: 30px;
+  }
+  ul {
+    margin-top: 30px;
+  }
+  li {
+    widows: 300px;
+    height: 30px;
+    margin-bottom: 9px;
+  }
+  li a {
+    display: block;
+    width: 300px;
+    height: 30px;
+    margin-bottom: 9px;
+    background: #F7F5F2;
+    padding: 5px 0 0 20px;
+  }
+  li a:hover {
+    background-color: #EFEFEF;
+  }
+  .orange {
+    border-left: 5px solid #F5876E;
+  }
+  .blue{
+    border-left: 5px solid #61A8DC;
+  }
+  .green{
+     border-left: 5px solid #8EBD40;
+   }
+  .purple {
+    border-left: 5px solid #988CC3;
+  }
+  .gold {
+    border-left: 5px solid #D8C86E;
+  }
+  .code-style {
+    width: 10%;
+    display: block;
+    margin-top: 30px;
+    img {
+      padding-top: 10px;
+    }
+  }
+}
