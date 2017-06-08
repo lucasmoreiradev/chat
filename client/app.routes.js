@@ -4,6 +4,7 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { LoginModule } from './pages/login/login.module';
 import { SignupModule } from './pages/signup/signup.module';
 import { ChatModule } from './pages/chat/chat.module'
+import { WelcomeModule } from './pages/welcome/welcome.module'
 
 import { UserResolver } from './resolvers/user.resolver'
 import { CurrentUserResolver } from './resolvers/currentuser.resolver'
@@ -14,12 +15,17 @@ import { ProfilePage } from './pages/profile/profile.page';
 import { LoginPage } from './pages/login/login.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { ChatPage } from './pages/chat/chat.page'
+import { WelcomePage } from './pages/welcome/welcome.page'
 
 export const routes = [
   {
     path: '',
     component: DashboardPage,
     children: [
+      {
+        path: 'welcome',
+        component: WelcomePage
+      },
       {
         path: 'profile/:username',
         component: ProfilePage,
@@ -57,7 +63,8 @@ export const routes = [
     DashboardModule,
     LoginModule,
     SignupModule,
-    ChatModule
+    ChatModule,
+    WelcomeModule
   ],
   providers: [
     UserResolver,

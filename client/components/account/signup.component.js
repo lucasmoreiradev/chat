@@ -41,7 +41,7 @@ export class SignupComponent {
   onSubmit () {
     this.auth.signup(this.model)
       .then(user => {
-        this.router.navigate([''])
+        this.router.navigate(['welcome'])
       })
       .catch(err => {
         if (err.status === 401) {
