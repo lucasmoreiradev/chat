@@ -49,8 +49,6 @@ export class ProfilePage {
         this.currentUser.friends.forEach(friend => {
           if (friend._id === this.user._id) {
             this.friend = true
-          } else {
-            this.friend = false
           }
         })
 
