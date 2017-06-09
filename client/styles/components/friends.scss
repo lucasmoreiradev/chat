@@ -46,10 +46,9 @@ friends {
       padding-top: 8px;
     }
     .notification {
-      border: 3px solid red;
-      border-radius: 20%;
-      color: red;
-      font-weight: 500;
+      border: 2px solid $warn-color;
+      color: $warn-color;
+      font-weight: 900;
       padding: 1px;
     }
   }

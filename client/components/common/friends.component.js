@@ -24,7 +24,7 @@ import * as map from 'lodash/map'
                 <div class="info">
                   <p [class]="friend.active ? 'active' : 'inactive'">
                     @{{ friend.username }}
-                    <span *ngIf="friend.notification" class="notification">!</span>
+                    <span *ngIf="friend.notification" class="notification">...</span>
                   </p>
                   <span class="last-seen">
                     visto por último: {{ friend.active ? 'ativo agora' : friend.updated_at | date: 'MMM dd HH:mm' }} 
