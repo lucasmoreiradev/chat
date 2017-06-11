@@ -30,6 +30,10 @@ const bindListeners = (io) => {
       console.log(chalk.yellow(`socket-io: ${socket.request.user.username} disconnected`))
       UserUtils.handlePresence(socket.request.user._id, false)
     })
+
+    socket.on(`user:${socket.request.user._id}:typing`, obj => {
+      io.to(`user:${obj.to}`).emit(`user:${socket.request.user._id}:typing`, obj.value)
+    })
   })
 
 

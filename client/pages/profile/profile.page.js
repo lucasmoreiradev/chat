@@ -25,9 +25,10 @@ export class ProfilePage {
     this.socket = socket
   }
   ngOnInit () {
-    this.friend = false
     this.sub = this.route.data
       .subscribe(({ user, currentUser }) => {
+        this.friend = false
+        this.stopForEach = false
         this.user = user
         this.currentUser = currentUser
 
@@ -47,8 +48,13 @@ export class ProfilePage {
         })
 
         this.currentUser.friends.forEach(friend => {
-          if (friend._id === this.user._id) {
-            this.friend = true
+          if (!this.stopForEach) {
+            if (friend._id === this.user._id) {
+              this.friend = true
+              this.stopForEach = true
+            } else {
+              this.friend = false
+            }
           }
         })
 

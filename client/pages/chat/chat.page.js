@@ -27,6 +27,7 @@ export class ChatPage {
   ngOnInit () {
     this.sub = this.route.data
       .subscribe(({ user, currentUser }) => {
+        this.typing = false
         this.user = user
         this.currentUser = currentUser
 
@@ -42,7 +43,7 @@ export class ChatPage {
         this.socket.sync(`message:${this.user._id}`, message => {
           this.messages.push(message)
           this.handleScroll()
-
+          this.typing = false
           this.api.update(`messages/seen/${message._id}`, { seen: true })
             .catch(err => console.log(err))
         })
@@ -55,9 +56,32 @@ export class ChatPage {
             }
           })
         })
+
+        this.socket.sync(`user:${this.user._id}:typing`, value => {
+          this.typing = value
+        })
+
+        this.socket.sync(`user:${this.user._id}:save`, user => {
+          if (!user.active) {
+            this.typing = false
+          }
+        })
       })
 
     this.message = {}
+  }
+  handleTyping (event) {
+    if (event) {
+      this.socket.emit(`user:${this.currentUser._id}:typing`, { 
+        to: this.user._id,
+        value: true
+      })
+    } else {
+      this.socket.emit(`user:${this.currentUser._id}:typing`, {
+        to: this.user._id,
+        value: false
+      })
+    }
   }
   ngAfterViewInit() {
     this.textareaEl.nativeElement.focus()

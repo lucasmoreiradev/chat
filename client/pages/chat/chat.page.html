@@ -18,8 +18,11 @@
       </div>
     </div>
   </div>
+  <div class="typing" *ngIf="typing">
+    <p>{{ this.user.username }} está digitando...</p>
+  </div>
   <form name="gm" class="send-gm" (ngSubmit)="sendMessage()">
-    <textarea [(ngModel)]="message.text" name="message" #textarea (keydown)="handleMessage($event)"></textarea>
+    <textarea [(ngModel)]="message.text" (ngModelChange)="handleTyping($event)" name="message" #textarea (keydown)="handleMessage($event)"></textarea>
     <button class="send" [disabled]="!message.text">
       Enviar 
     </button>
