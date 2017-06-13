@@ -8,4 +8,5 @@ module.exports = (router) => {
   router.get(`/api/users/search`, Middlewares.ensureAuthenticated(), controller.showByUsernameLike)
   router.get(`/api/users/:username`, Middlewares.ensureAuthenticated(), controller.show)
   router.put(`/api/users/:id`, Middlewares.ensureAuthenticated(), controller.update)
+  router.put(`/api/users/remove-friend/:id`, Middlewares.ensureAuthenticated(), controller.removeFriend)
 }
