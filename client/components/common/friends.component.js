@@ -96,7 +96,7 @@ export class FriendsComponent {
               if (f._id === request.requested._id) exists = true 
             })
             if (!exists) {
-              this.currentUser.friends.push(request.requested)
+              this.currentUser.friends.unshift(request.requested)
             }
           } 
 
@@ -106,7 +106,7 @@ export class FriendsComponent {
               if (f._id === request.requester._id) exists = true 
             })
             if (!exists) {
-              this.currentUser.friends.push(request.requester)
+              this.currentUser.friends.unshift(request.requester)
             }
           }
         })

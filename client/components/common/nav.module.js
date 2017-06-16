@@ -1,10 +1,11 @@
 'use strict';
 
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
-import { NavComponent } from './nav.component';
-import { SearchComponent } from '../search/search.component';
-import { SharedModule } from './shared.module';
+import { NavComponent } from './nav.component'
+import { SearchComponent } from '../search/search.component'
+import { NotificationsComponent } from '../notifications/notifications.component'
+import { SharedModule } from './shared.module'
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SharedModule } from './shared.module';
   ],
   declarations: [
     NavComponent,
-    SearchComponent
+    SearchComponent,
+    NotificationsComponent
   ],
   exports: [
     NavComponent

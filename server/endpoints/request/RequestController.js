@@ -13,6 +13,25 @@ class RequestController {
       .catch(err => res.send(err))
   }
 
+  static pendingMe (req, res) {
+    Request.find({
+      requested: req.user._id,
+      approved: null
+    })
+    .populate('requester', '-password')
+    .then(requests => res.json(requests))
+    .catch(err => res.send(err))
+  }
+
+  static findById (req, res) {
+    Request.findById(req.params.id)
+      .populate('requester', '-password')
+      .then(request => {
+        return res.json(request)
+      })
+      .catch(err => res.send(err).status(500))
+  }
+
   static match (req, res) {
     Request.findOne({
       $or: [{

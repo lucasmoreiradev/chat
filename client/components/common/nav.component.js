@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router';
         <search></search>
       </div>
       <div class="controls">
+        <notifications></notifications>
         <a routerLink="/profile/{{ currentUser.username }}" class="perfil">
           <img [src]="currentUser.avatar_url">
         </a>
