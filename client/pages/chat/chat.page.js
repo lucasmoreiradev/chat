@@ -31,6 +31,18 @@ export class ChatPage {
         this.user = user
         this.currentUser = currentUser
 
+        this.stopForEach = false
+        this.currentUser.friends.forEach(friend => {
+          if (!this.stopForEach) {
+            if (friend._id === this.user._id) {
+              this.friend = true
+              this.stopForEach = true
+            } else {
+              this.friend = false
+            }
+          }
+        })
+
         this.api.update(`messages/see/${this.user._id}`, { seen: true })
           .catch(err => console.log(err))
 
@@ -108,7 +120,19 @@ export class ChatPage {
   }
   handleMessage (event) {
     if (event.keyCode === 13 && this.message.text) {
-      this.sendMessage()
+      if (!this.friend) {
+        const message = {
+          sender: {
+            username: 'ChatBot',
+            avatar_url: 'https://www.theweakestlink.es/wp-content/uploads/2017/04/bot-de-telegram.jpg'
+          },
+          text: `Oooops... você não possui o ${this.user.username} adicionado! Adicione-o para conversar com ele. 🕶`,
+          created_at: new Date()
+        }
+        this.messages.push(message)
+      } else {
+        this.sendMessage()
+      }
     }
   }
   handleScroll () {

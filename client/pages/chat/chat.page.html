@@ -13,6 +13,7 @@
             {{ message.sender.username }}
           </a>
           <span>{{ message.created_at | date: 'MMM dd HH:mm'}}</span>
+          <span class="only-to-you" *ngIf="message.sender.username === 'ChatBot'">(Visível apenas para você)</span>
           <div class="message-text">{{ message.text }}</div> 
         </div>
       </div>
