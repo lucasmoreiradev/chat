@@ -22,7 +22,8 @@ const publicPath = path.join(__dirname, '../public/')
 
 // Mongoose connection
 mongoose.promise = global.Promise
-mongoose.connect('mongodb://localhost/chat-dev')
+
+mongoose.connect(process.env.MONGODB || 'mongodb://localhost/chat-dev')
 
 // Middlewares
 if (process.env.NODE_ENV != 'production') {
