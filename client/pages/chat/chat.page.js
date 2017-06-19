@@ -121,12 +121,16 @@ export class ChatPage {
   handleMessage (event) {
     if (event.keyCode === 13 && this.message.text) {
       if (!this.friend) {
+        let text = `Oooops... você não possui o ${this.user.username} adicionado! Adicione-o para conversar com ele. 🕶`
+        if (this.currentUser._id === this.user._id) {
+          text = `Você não pode enviar uma mensagem para si mesmo, ${this.currentUser.username}! 😕`
+        }
         const message = {
           sender: {
             username: 'ChatBot',
             avatar_url: 'https://www.theweakestlink.es/wp-content/uploads/2017/04/bot-de-telegram.jpg'
           },
-          text: `Oooops... você não possui o ${this.user.username} adicionado! Adicione-o para conversar com ele. 🕶`,
+          text: text,
           created_at: new Date()
         }
         this.messages.push(message)
