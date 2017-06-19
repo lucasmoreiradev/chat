@@ -99,19 +99,35 @@ export class ChatPage {
     this.textareaEl.nativeElement.focus()
   }
   sendMessage () {
-    const message = {
-      receipent: this.user._id,
-      sender: this.currentUser._id,
-      text: this.message.text
-    }
+    if (!this.friend) {
+      let text = `Oooops... você não possui o ${this.user.username} adicionado! Adicione-o para conversar com ele. 🕶`
+      if (this.currentUser._id === this.user._id) {
+        text = `Você não pode enviar uma mensagem para si mesmo, ${this.currentUser.username}! 😕`
+      }
+      const message = {
+        sender: {
+          username: 'ChatBot',
+          avatar_url: 'https://www.theweakestlink.es/wp-content/uploads/2017/04/bot-de-telegram.jpg'
+        },
+        text: text,
+        created_at: new Date()
+      }
+      this.messages.push(message)
+    } else {
+      const message = {
+        receipent: this.user._id,
+        sender: this.currentUser._id,
+        text: this.message.text
+      }
 
-    this.api.create(`messages`, message)
-      .then(message => {
-        message.sender = this.currentUser
-        this.message.text = null
-        this.messages.push(message)
-        this.handleScroll()
-      }).catch(err => console.log(err))
+      this.api.create(`messages`, message)
+        .then(message => {
+          message.sender = this.currentUser
+          this.message.text = null
+          this.messages.push(message)
+          this.handleScroll()
+        }).catch(err => console.log(err))
+    }
   }
   ngOnDestroy () {
     this.sub.unsubscribe()
@@ -120,23 +136,7 @@ export class ChatPage {
   }
   handleMessage (event) {
     if (event.keyCode === 13 && this.message.text) {
-      if (!this.friend) {
-        let text = `Oooops... você não possui o ${this.user.username} adicionado! Adicione-o para conversar com ele. 🕶`
-        if (this.currentUser._id === this.user._id) {
-          text = `Você não pode enviar uma mensagem para si mesmo, ${this.currentUser.username}! 😕`
-        }
-        const message = {
-          sender: {
-            username: 'ChatBot',
-            avatar_url: 'https://www.theweakestlink.es/wp-content/uploads/2017/04/bot-de-telegram.jpg'
-          },
-          text: text,
-          created_at: new Date()
-        }
-        this.messages.push(message)
-      } else {
-        this.sendMessage()
-      }
+      this.sendMessage()
     }
   }
   handleScroll () {
