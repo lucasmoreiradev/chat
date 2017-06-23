@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router'
 import { ApiService } from '../../services/api.service'
 import { SocketService } from '../../services/socket.service'
 import * as map from 'lodash/map'
+import * as Buzz from 'node-buzz'
 
 import * as template from './chat.page.html'
 
@@ -23,6 +24,10 @@ export class ChatPage {
     this.route = route
     this.socket = socket
     this.cdr = cdr
+    this.alert = new Buzz.sound(
+      '/assets/sounds/message.mp3',
+      { preload: true }
+    )
   }
   ngOnInit () {
     this.sub = this.route.data
@@ -53,6 +58,7 @@ export class ChatPage {
           })
 
         this.socket.sync(`message:${this.user._id}`, message => {
+          this.alert.play()
           this.messages.push(message)
           this.handleScroll()
           this.typing = false
