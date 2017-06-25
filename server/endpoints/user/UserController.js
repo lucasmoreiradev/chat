@@ -46,7 +46,7 @@ class UserController {
       if (err) return res.send(err)
       if (!user) return res.sendStatus(404)
 
-      var updated = _.merge(user, req.body)
+      let updated = _.merge(user, req.body)
       updated.save((err, user) => {
         if (err) return res.send(err)
         res.json(user)
