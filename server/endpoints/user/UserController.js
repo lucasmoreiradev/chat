@@ -5,10 +5,6 @@ const User = require('../../models/User')
 
 class UserController {
 
-  static create (req, res) {
-
-  }
-
   static me (req, res) {
     User.findById(req.user._id)
       .select('-password')
