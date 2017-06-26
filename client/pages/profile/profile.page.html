@@ -2,7 +2,7 @@
   <header [ngStyle]="{ 'background-image': !user.cover_url ? '' : 'url(' + user.cover_url + ')' }">
     <figure class="loader" *ngIf="shouldHide(user.cover_url)"></figure>
     <upload 
-      allowd="image/*" kind="cover"
+      allowed="image/*" kind="cover"
       (path)="user.cover_url = $event"
       *ngIf="user._id === currentUser._id">
     </upload>
@@ -13,7 +13,7 @@
       <ng-template #loader>
         <figure class="loader"></figure>
       </ng-template>
-      <upload allowerd="image/jpeg,image/png"
+      <upload allowed="image/jpeg,image/png"
               *ngIf="user._id === currentUser._id"
               kind="avatar" (path)="onChangeAvatar($event)">
       </upload>
