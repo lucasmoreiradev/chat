@@ -8,8 +8,17 @@ import { ApiService } from '../../services/api.service'
   selector: 'requests',
   template: `
     <div class="requests" *ngIf="user._id !== currentUser._id">
-      <button *ngIf="!request && !friend" class="request-btn" (click)="sendRequest()">Adicionar amigo</button>
+      <button *ngIf="!request && !friend"
+              class="request-btn"
+              (click)="sendRequest()">
+        Adicionar amigo
+      </button>
       <p *ngIf="request" class="waiting">Aguardando aprovação...</p>
+      <button class="decline"
+                    (click)="removeFriend()"
+                    *ngIf="!request && friend">
+        Remover @{{ user.username }} da sua lista de amigos
+      </button>
     </div>
     <div class="requests" *ngIf="request && request.requested === currentUser._id">
       <button class="accept" (click)="handleApproval(true)">
@@ -48,5 +57,11 @@ export class RequestsComponent {
         this.friend = request.approved
       })
       .catch(err => console.log(err))
+  }
+  removeFriend () {
+    this.api.update(`users/remove-friend/${this.user._id}`, {})
+      .then(user => {
+        this.friend = false
+      })
   }
 }

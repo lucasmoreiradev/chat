@@ -54,6 +54,32 @@ class UserController {
     })
   }
 
+  static removeFriend (req, res) {
+    User.findById(req.user._id, (err, user) => {
+      if (err) return res.send(err)
+      if (!user) return res.sendStatus(404)
+
+      user.friends = user.friends.filter(id => {
+        return id.toString() !== req.params.id.toString()
+      })
+
+      user.save()
+    })
+
+    User.findById(req.params.id, (err, user) => {
+      if (err) return res.send(err)
+      if (!user) return res.sendStatus(404)
+
+      user.friends = user.friends.filter(id => {
+        return id.toString() !== req.user._id.toString() 
+      })
+
+      user.save()
+    })
+
+    res.json({}).status(200)
+  }
+
 }
 
 module.exports = UserController 
