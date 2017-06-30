@@ -1,7 +1,7 @@
 'use strict'
 
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { NavComponent } from '../../components/common/nav.component'
 
 @Component({
@@ -15,11 +15,13 @@ import { NavComponent } from '../../components/common/nav.component'
 })
 
 export class DashboardPage {
-  constructor (route: ActivatedRoute) {
-    this.route = route 
+  constructor (activatedRoute: ActivatedRoute, route: Router) {
+    this.activatedRoute = activatedRoute 
+    this.route = route
   }
   ngOnInit () {
-    this.sub = this.route.data
+    this.route.navigate(['/welcome'])
+    this.sub = this.activatedRoute.data
       .subscribe(({ currentUser }) => this.currentUser = currentUser)
   }
   ngOnDestroy () {
