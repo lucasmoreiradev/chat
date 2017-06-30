@@ -75,8 +75,8 @@ export class ChatPage {
           })
         })
 
-        this.socket.sync(`user:${this.user._id}:typing`, value => {
-          this.typing = value
+        this.socket.sync(`user:${this.user._id}:typing`, isTyping => {
+          this.typing = isTyping
         })
 
         this.socket.sync(`user:${this.user._id}:save`, user => {
@@ -92,12 +92,12 @@ export class ChatPage {
     if (event) {
       this.socket.emit(`user:${this.currentUser._id}:typing`, { 
         to: this.user._id,
-        value: true
+        isTyping: true
       })
     } else {
       this.socket.emit(`user:${this.currentUser._id}:typing`, {
         to: this.user._id,
-        value: false
+        isTyping: false
       })
     }
   }

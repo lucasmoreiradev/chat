@@ -31,8 +31,8 @@ const bindListeners = (io) => {
       UserUtils.handlePresence(socket.request.user._id, false)
     })
 
-    socket.on(`user:${socket.request.user._id}:typing`, obj => {
-      io.to(`user:${obj.to}`).emit(`user:${socket.request.user._id}:typing`, obj.value)
+    socket.on(`user:${socket.request.user._id}:typing`, data => {
+      io.to(`user:${data.to}`).emit(`user:${socket.request.user._id}:typing`, data.isTyping)
     })
   })
 
