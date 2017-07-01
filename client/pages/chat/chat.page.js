@@ -89,17 +89,10 @@ export class ChatPage {
     this.message = {}
   }
   handleTyping (event) {
-    if (event) {
-      this.socket.emit(`user:${this.currentUser._id}:typing`, { 
-        to: this.user._id,
-        isTyping: true
-      })
-    } else {
-      this.socket.emit(`user:${this.currentUser._id}:typing`, {
-        to: this.user._id,
-        isTyping: false
-      })
-    }
+    this.socket.emit(`user:${this.currentUser._id}:typing`, { 
+      to: this.user._id,
+      isTyping: event.length > 0 
+    })
   }
   ngAfterViewInit() {
     this.textareaEl.nativeElement.focus()
