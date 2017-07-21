@@ -14,7 +14,7 @@ import * as findIndex from 'lodash/findIndex'
       <img src="http://res.cloudinary.com/dvko3bggq/image/upload/v1497498167/alarm_1_cmrimg.png">
       <span *ngIf="requests.length > 0" class="qtd-notifications">{{ requests.length }}</span>
     </a>
-    <div class="dropdown" *ngIf="viewing">
+    <div class="dropdown" *ngIf="viewing && requests.length > 0">
       <div *ngFor="let request of requests">
         <div class="row">
          <a (click)="viewing = false" routerLink="/profile/{{ request.requester.username }}">
